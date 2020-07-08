@@ -26,12 +26,8 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c18f69a3-776f-4dd6-998c-4d459ba95fe2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gomp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gomp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="c18f69a3-776f-4dd6-998c-4d459ba95fe2" name="Default Changelist" comment="update ignore file1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apache-jena-fuseki-3.14.0/webapp/admin-logs.html" beforeDir="false" afterPath="$PROJECT_DIR$/apache-jena-fuseki-3.14.0/webapp/admin-logs.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -528,7 +524,7 @@
       <workItem from="1588164949323" duration="8253000" />
       <workItem from="1588173454554" duration="485000" />
       <workItem from="1588177000108" duration="1033000" />
-      <workItem from="1594235213622" duration="795000" />
+      <workItem from="1594235213622" duration="3495000" />
     </task>
     <task id="LOCAL-00001" summary="update ignore file">
       <created>1588177324193</created>
@@ -537,7 +533,28 @@
       <option name="project" value="LOCAL" />
       <updated>1588177324193</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update ignore file">
+      <created>1594236109639</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1594236109639</updated>
+    </task>
+    <task id="LOCAL-00003" summary="update ignore file1">
+      <created>1594236473742</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1594236473742</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update ignore file1">
+      <created>1594239916838</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1594239916838</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -616,7 +633,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update ignore file" />
-    <option name="LAST_COMMIT_MESSAGE" value="update ignore file" />
+    <MESSAGE value="update ignore file1" />
+    <option name="LAST_COMMIT_MESSAGE" value="update ignore file1" />
   </component>
   <component name="WindowStateProjectService">
     <state x="434" y="193" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1588177201502">
@@ -690,10 +708,10 @@
       <screen x="0" y="23" width="1920" height="1177" />
     </state>
     <state width="500" height="445" key="SwitcherDM/0.23.1920.1177/-1440.323.1440.877@0.23.1920.1177" timestamp="1588171323201" />
-    <state x="392" y="163" key="Vcs.Push.Dialog.v2" timestamp="1594235957672">
+    <state x="392" y="163" key="Vcs.Push.Dialog.v2" timestamp="1594239931085">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="392" y="163" key="Vcs.Push.Dialog.v2/0.0.1600.860/1600.0.1440.860@0.0.1600.860" timestamp="1594235957672" />
+    <state x="392" y="163" key="Vcs.Push.Dialog.v2/0.0.1600.860/1600.0.1440.860@0.0.1600.860" timestamp="1594239931085" />
     <state x="1540" y="-177" width="1720" height="977" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1588165924324">
       <screen x="1440" y="-277" width="1920" height="1177" />
     </state>
