@@ -2,6 +2,7 @@
 #__all__ = ('ColorPickerCustom', 'ColorWheel')
 
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.colorpicker import polar_to_rect
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.widget import Widget
 from kivy.properties import (NumericProperty, BoundedNumericProperty,

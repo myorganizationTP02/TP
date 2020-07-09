@@ -26,12 +26,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c18f69a3-776f-4dd6-998c-4d459ba95fe2" name="Default Changelist" comment="update ignore file1">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apache-jena-fuseki-3.14.0/webapp/services.html" beforeDir="false" afterPath="$PROJECT_DIR$/apache-jena-fuseki-3.14.0/webapp/services.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apache-jena-fuseki-3.14.0/webapp/validate.html" beforeDir="false" afterPath="$PROJECT_DIR$/apache-jena-fuseki-3.14.0/webapp/validate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/colorPickerCustom/ColorWheel.py" beforeDir="false" afterPath="$PROJECT_DIR$/colorPickerCustom/ColorWheel.py" afterDir="false" />
-    </list>
+    <list default="true" id="c18f69a3-776f-4dd6-998c-4d459ba95fe2" name="Default Changelist" comment="update ignore file1" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -527,7 +522,7 @@
       <workItem from="1588164949323" duration="8253000" />
       <workItem from="1588173454554" duration="485000" />
       <workItem from="1588177000108" duration="1033000" />
-      <workItem from="1594235213622" duration="5635000" />
+      <workItem from="1594235213622" duration="6515000" />
     </task>
     <task id="LOCAL-00001" summary="update ignore file">
       <created>1588177324193</created>
@@ -571,7 +566,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594249964768</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="update ignore file1">
+      <created>1594251153134</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1594251153134</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -725,10 +727,10 @@
       <screen x="0" y="23" width="1920" height="1177" />
     </state>
     <state width="500" height="445" key="SwitcherDM/0.23.1920.1177/-1440.323.1440.877@0.23.1920.1177" timestamp="1588171323201" />
-    <state x="392" y="163" key="Vcs.Push.Dialog.v2" timestamp="1594239931085">
+    <state x="392" y="163" key="Vcs.Push.Dialog.v2" timestamp="1594252996368">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="392" y="163" key="Vcs.Push.Dialog.v2/0.0.1600.860/1600.0.1440.860@0.0.1600.860" timestamp="1594239931085" />
+    <state x="392" y="163" key="Vcs.Push.Dialog.v2/0.0.1600.860/1600.0.1440.860@0.0.1600.860" timestamp="1594252996368" />
     <state x="1540" y="-177" width="1720" height="977" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1588165924324">
       <screen x="1440" y="-277" width="1920" height="1177" />
     </state>

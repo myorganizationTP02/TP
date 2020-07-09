@@ -1,5 +1,4 @@
-from kivy.multistroke import distance
-from kivy.uix.colorpicker import _ColorArc
+from kivy.uix.colorpicker import rect_to_polar
 from kivy.uix.widget import Widget
 from kivy.properties import (NumericProperty, BoundedNumericProperty,
                              ListProperty,
@@ -8,7 +7,8 @@ from kivy.clock import Clock
 from kivy.graphics import Color
 from math import pi
 
-from colorPickerCustom.colorPickerApp import rect_to_polar
+from colorPickerCustom.colorArc import _ColorArc
+from colorPickerCustom.colorPickerApp import distance
 
 
 class ColorWheel(Widget):
