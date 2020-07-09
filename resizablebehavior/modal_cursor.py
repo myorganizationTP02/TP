@@ -1,4 +1,4 @@
-from kivy.properties import BooleanProperty, StringProperty, ListProperty
+from kivy.properties import BooleanProperty, StringProperty, ListProperty, Logger
 from kivy.graphics import InstructionGroup
 from kivy.uix.modalview import ModalView
 from kivy.graphics import Rectangle

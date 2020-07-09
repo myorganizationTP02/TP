@@ -1,5 +1,4 @@
-
-
+from kivy.uix.colorpicker import rect_to_polar
 from kivy.uix.widget import Widget
 from kivy.properties import (NumericProperty, BoundedNumericProperty,
                              ListProperty,
@@ -7,6 +6,10 @@ from kivy.properties import (NumericProperty, BoundedNumericProperty,
 from kivy.clock import Clock
 from kivy.graphics import Color
 from math import pi
+
+from colorPickerCustom.colorArc import _ColorArc
+from colorPickerCustom.colorPickerApp import distance
+
 
 class ColorWheel(Widget):
     '''Chromatic wheel for the ColorPicker.
@@ -80,7 +83,7 @@ class ColorWheel(Widget):
     def on__radius(self, instance, value):
         self.init_wheel(None)
 
-    def init_wheel(self, dt):
+    def init_wheel(self, dt,):
         # initialize list to hold all meshes
         self.canvas.clear()
         self.arcs = []
