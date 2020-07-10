@@ -517,6 +517,8 @@ class ScreenAlbum(Screen):
         return [True, command, output_filename]
 
     def get_ffmpeg_command(self, input_folder, input_filename, output_file_folder, input_size, noaudio=False, input_images=False, input_file=None, input_framerate=None, input_pixel_format=None, encoding_settings=None, start=None, duration=None):
+
+
         if not encoding_settings:
             encoding_settings = self.encoding_settings
         if encoding_settings['file_format'].lower() == 'auto':
@@ -666,16 +668,12 @@ class ScreenAlbum(Screen):
         start_seconds = start_point * duration
         duration_seconds = (end_point * duration) - start_seconds
 
-        pixel_format = input_metadata['src_pix_fmt']
-        input_size = input_metadata['src_vid_size']
-        input_file_folder, input_filename = os.path.split(input_file)
-        output_file_folder = input_file_folder+os.path.sep+'reencode'
-        command_valid, command, output_filename = self.get_ffmpeg_command(input_file_folder, input_filename, output_file_folder, input_size, input_framerate=framerate, input_pixel_format=pixel_format, start=start_seconds, duration=duration_seconds)
-        if not command_valid:
-            self.cancel_encode()
-            self.dismiss_popup()
-            app.popup_message(text="Invalid FFMPEG command: " + command, title='Warning')
-        print(command)
+        command, input_file_folder, input_filename, output_file_folder, output_filename = self.Validecommand(app,
+                                                                                                             duration_seconds,
+                                                                                                             framerate,
+                                                                                                             input_file,
+                                                                                                             input_metadata,
+                                                                                                             start_seconds)
 
         output_file = output_file_folder+os.path.sep+output_filename
         if not os.path.isdir(output_file_folder):
@@ -811,6 +809,24 @@ class ScreenAlbum(Screen):
 
         #switch active video in photo list back to image
         self.show_selected()
+
+    def Validecommand(self, app, duration_seconds, framerate, input_file, input_metadata, start_seconds):
+        pixel_format = input_metadata['src_pix_fmt']
+        input_size = input_metadata['src_vid_size']
+        input_file_folder, input_filename = os.path.split(input_file)
+        output_file_folder = input_file_folder + os.path.sep + 'reencode'
+        command_valid, command, output_filename = self.get_ffmpeg_command(input_file_folder, input_filename,
+                                                                          output_file_folder, input_size,
+                                                                          input_framerate=framerate,
+                                                                          input_pixel_format=pixel_format,
+                                                                          start=start_seconds,
+                                                                          duration=duration_seconds)
+        if not command_valid:
+            self.cancel_encode()
+            self.dismiss_popup()
+            app.popup_message(text="Invalid FFMPEG command: " + command, title='Warning')
+        print(command)
+        return command, input_file_folder, input_filename, output_file_folder, output_filename
 
     def set_photo(self, photo):
         self.photo = photo
