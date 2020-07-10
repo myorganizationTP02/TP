@@ -5,6 +5,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="android.permissions" />
+          <option value="tests.mock.ProductionClass" />
         </list>
       </option>
     </inspection_tool>

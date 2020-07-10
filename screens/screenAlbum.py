@@ -1783,11 +1783,7 @@ class ScreenAlbum(Screen):
         output_file_folder = input_file_folder+os.path.sep+'reencode'
         encoding_settings = None
         preset_name = app.selected_encoder_preset
-        for preset in app.encoding_presets:
-            if preset['name'] == preset_name:
-                encoding_settings = preset
-        if not encoding_settings:
-            encoding_settings = app.encoding_presets[0]
+        encoding_settings = self.presetencodingcheck(app, encoding_settings, preset_name)
 
         if not os.path.isdir(output_file_folder):
             try:
@@ -2019,6 +2015,14 @@ class ScreenAlbum(Screen):
 
         #switch active video in photo list back to image
         self.show_selected()
+
+    def presetencodingcheck(self, app, encoding_settings, preset_name):
+        for preset in app.encoding_presets:
+            if preset['name'] == preset_name:
+                encoding_settings = preset
+        if not encoding_settings:
+            encoding_settings = app.encoding_presets[0]
+        return encoding_settings
 
     def save_image(self):
         """Saves any temporary edits on the currently viewed image."""

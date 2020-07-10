@@ -26,8 +26,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c18f69a3-776f-4dd6-998c-4d459ba95fe2" name="Default Changelist" comment="update ignore file1">
+    <list default="true" id="c18f69a3-776f-4dd6-998c-4d459ba95fe2" name="Default Changelist" comment="update ignore file03">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/screenAlbum.py" beforeDir="false" afterPath="$PROJECT_DIR$/screens/screenAlbum.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -525,7 +528,7 @@
       <workItem from="1588173454554" duration="485000" />
       <workItem from="1588177000108" duration="1033000" />
       <workItem from="1594235213622" duration="10041000" />
-      <workItem from="1594408621173" duration="1437000" />
+      <workItem from="1594408621173" duration="4368000" />
     </task>
     <task id="LOCAL-00001" summary="update ignore file">
       <created>1588177324193</created>
@@ -618,7 +621,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594255338172</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="update ignore file03">
+      <created>1594410070986</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1594410070986</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView">
@@ -698,7 +708,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update ignore file" />
     <MESSAGE value="update ignore file1" />
-    <option name="LAST_COMMIT_MESSAGE" value="update ignore file1" />
+    <MESSAGE value="update ignore file03" />
+    <option name="LAST_COMMIT_MESSAGE" value="update ignore file03" />
   </component>
   <component name="WindowStateProjectService">
     <state x="434" y="193" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1588177201502">
@@ -762,10 +773,10 @@
     </state>
     <state width="1878" height="277" key="GridCell.Tab.1.right/0.23.1920.1177/-1440.323.1440.877@0.23.1920.1177" timestamp="1588173450490" />
     <state width="1878" height="277" key="GridCell.Tab.1.right/1440.-277.1920.1177/0.23.1440.877/-1600.-46.1600.877@1440.-277.1920.1177" timestamp="1588167577842" />
-    <state x="391" y="150" key="SettingsEditor" timestamp="1594255086297">
+    <state x="391" y="150" key="SettingsEditor" timestamp="1594411036637">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="391" y="150" key="SettingsEditor/0.0.1600.860/1600.0.1440.860@0.0.1600.860" timestamp="1594255086297" />
+    <state x="391" y="150" key="SettingsEditor/0.0.1600.860/1600.0.1440.860@0.0.1600.860" timestamp="1594411036637" />
     <state x="1050" y="-950" key="SettingsEditor/0.22.1440.878/-1019.-878.1600.878/581.-1178.1920.1178@581.-1178.1920.1178" timestamp="1587218711206" />
     <state x="469" y="251" key="SettingsEditor/0.23.1920.1177/-1440.323.1440.877@0.23.1920.1177" timestamp="1588170233303" />
     <state x="1909" y="-49" key="SettingsEditor/1440.-277.1920.1177/0.23.1440.877/-1600.-46.1600.877@1440.-277.1920.1177" timestamp="1588164928722" />
@@ -773,10 +784,10 @@
       <screen x="0" y="23" width="1920" height="1177" />
     </state>
     <state width="500" height="445" key="SwitcherDM/0.23.1920.1177/-1440.323.1440.877@0.23.1920.1177" timestamp="1588171323201" />
-    <state x="392" y="163" key="Vcs.Push.Dialog.v2" timestamp="1594255395983">
+    <state x="392" y="163" key="Vcs.Push.Dialog.v2" timestamp="1594410084767">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="392" y="163" key="Vcs.Push.Dialog.v2/0.0.1600.860/1600.0.1440.860@0.0.1600.860" timestamp="1594255395983" />
+    <state x="392" y="163" key="Vcs.Push.Dialog.v2/0.0.1600.860/1600.0.1440.860@0.0.1600.860" timestamp="1594410084767" />
     <state x="1540" y="-177" width="1720" height="977" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1588165924324">
       <screen x="1440" y="-277" width="1920" height="1177" />
     </state>
@@ -971,11 +982,6 @@
           <option name="timeStamp" value="163" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/screens/ScreenImporting.py</url>
-          <line>431</line>
-          <option name="timeStamp" value="165" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/window/PhotoManager.py</url>
           <line>190</line>
           <option name="timeStamp" value="166" />
@@ -997,22 +1003,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>1973</line>
+          <line>1969</line>
           <option name="timeStamp" value="204" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>2011</line>
+          <line>2007</line>
           <option name="timeStamp" value="205" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>2072</line>
+          <line>2076</line>
           <option name="timeStamp" value="206" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>2083</line>
+          <line>2087</line>
           <option name="timeStamp" value="207" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

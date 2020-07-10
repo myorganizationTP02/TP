@@ -11,9 +11,9 @@
     todo Rework cropping editor
     todo implement a .nomedia file that will make spm ignore a folder
 """
-from window.PhotoManager import PhotoManager
-
 import time
+
+from window.PhotoManager import PhotoManager
 
 start = time.perf_counter()
 
@@ -62,3 +62,5 @@ if platform == 'android':
 
 if __name__ == '__main__':
     PhotoManager().run()
+
+
