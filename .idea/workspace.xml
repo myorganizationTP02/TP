@@ -236,6 +236,9 @@
       <module name="gomp" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -420,6 +423,7 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.main" />
       <item itemvalue="Python tests.Unittests in test_geolocalisation.py" />
       <item itemvalue="Python tests.button unit test" />
       <item itemvalue="Python tests.UnitTest" />
@@ -427,7 +431,6 @@
       <item itemvalue="Python tests.Unittests for test_buttons.ButtonTestCase" />
       <item itemvalue="Python tests.Unittests for test_buttons.ButtonTestCase.test_Vertical_button" />
       <item itemvalue="Python tests.Unittests for test_buttons" />
-      <item itemvalue="Python.main" />
     </list>
     <recent_temporary>
       <list>
