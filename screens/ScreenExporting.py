@@ -360,40 +360,16 @@ class ScreenExporting(Screen):
         exported_photos = 0
         selected_photos = self.get_selected_photos()
         photos = []
-        for photo in selected_photos:
-            if photo[12] != 0:
-                ignore_file = False
-                if ignore_tags:
-                    for tag in ignore_tags:
-                        photo_tags = photo[8].split(',')
-                        if tag in photo_tags:
-                            ignore_file = True
-                if not preset['export_videos']:
-                    path, extension = os.path.splitext(photo[0])
-                    if extension.lower() in movietypes:
-                        ignore_file = True
-                if not ignore_file:
-                    photos.append(photo)
+        self.photo_in_selectphoto(ignore_tags, photos, preset, selected_photos)
 
         if not photos:
             return
 
         #determine export filenames (prevent any duplicate filenames)
         export_photos = []
-        for photo in photos:
-            photo_filename = os.path.basename(photo[0])
-            basename, extension = os.path.splitext(photo_filename)
-            test_name = photo_filename
-            add_number = 0
-            while test_name in export_photos:
-                add_number = add_number+1
-                test_name = basename+"("+str(add_number)+")"+extension
-            export_photos.append(test_name)
+        self.photo_in_photos(export_photos, photos)
 
-        if self.type == 'tag':
-            subfolder = 'Photos Tagged As '+self.target.title()
-        else:
-            subfolder = os.path.split(self.target)[1]
+        subfolder = self.self_tag()
 
         #ftp export mode
         if preset['export'] == 'ftp':
@@ -416,31 +392,10 @@ class ScreenExporting(Screen):
                 ftp_filelist = ftp.nlst()
 
                 #set the ftp folder and create if needed
-                if ftp_folder:
-                    subfolders = ftp_folder.split('/')
-                    for folder in subfolders:
-                        if folder not in ftp_filelist:
-                            ftp.mkd(folder)
-                        ftp.cwd(folder)
-                        ftp_filelist = ftp.nlst()
-                if preset['create_subfolder']:
-                    file_list = ftp.nlst()
-                    if subfolder not in file_list:
-                        ftp.mkd(subfolder)
-                    ftp.cwd(subfolder)
-                    ftp_filelist = ftp.nlst()
+                ftp_filelist = self.ftpfolder(ftp, ftp_filelist, ftp_folder)
+                ftp_filelist = self.presetsubfolder(ftp, ftp_filelist, preset, subfolder)
 
-                if preset['export_info']:
-                    self.popup.scanning_text = 'Uploading Photo Info...'
-                    infofile = os.path.join(".photoinfo.ini")
-                    if os.path.exists(infofile):
-                        os.remove(infofile)
-                    app.save_photoinfo(self.target, '.', '', photos=photos, newnames=export_photos)
-                    if '.photoinfo.ini' in ftp_filelist:
-                        ftp.delete('.photoinfo.ini')
-                    if os.path.exists(infofile):
-                        ftp.storbinary("STOR .photoinfo.ini", open(infofile, 'rb'))
-                        os.remove(infofile)
+                self.presetexportinfo(app, export_photos, ftp, ftp_filelist, photos, preset)
                 self.total_export = 0
                 for photo in photos:
                     photofile = os.path.join(photo[2], photo[0])
@@ -568,6 +523,72 @@ class ScreenExporting(Screen):
             scanning_button = self.popup.ids['scanningButton']
             scanning_button.text = 'OK'
             scanning_button.bind(on_release=self.finish_export)
+
+    def presetexportinfo(self, app, export_photos, ftp, ftp_filelist, photos, preset):
+        if preset['export_info']:
+            self.popup.scanning_text = 'Uploading Photo Info...'
+            infofile = os.path.join(".photoinfo.ini")
+            if os.path.exists(infofile):
+                os.remove(infofile)
+            app.save_photoinfo(self.target, '.', '', photos=photos, newnames=export_photos)
+            if '.photoinfo.ini' in ftp_filelist:
+                ftp.delete('.photoinfo.ini')
+            if os.path.exists(infofile):
+                ftp.storbinary("STOR .photoinfo.ini", open(infofile, 'rb'))
+                os.remove(infofile)
+
+    def presetsubfolder(self, ftp, ftp_filelist, preset, subfolder):
+        if preset['create_subfolder']:
+            file_list = ftp.nlst()
+            if subfolder not in file_list:
+                ftp.mkd(subfolder)
+            ftp.cwd(subfolder)
+            ftp_filelist = ftp.nlst()
+        return ftp_filelist
+
+    def ftpfolder(self, ftp, ftp_filelist, ftp_folder):
+        if ftp_folder:
+            subfolders = ftp_folder.split('/')
+            for folder in subfolders:
+                if folder not in ftp_filelist:
+                    ftp.mkd(folder)
+                ftp.cwd(folder)
+                ftp_filelist = ftp.nlst()
+        return ftp_filelist
+
+    def self_tag(self):
+        if self.type == 'tag':
+            subfolder = 'Photos Tagged As ' + self.target.title()
+        else:
+            subfolder = os.path.split(self.target)[1]
+        return subfolder
+
+    def photo_in_photos(self, export_photos, photos):
+        for photo in photos:
+            photo_filename = os.path.basename(photo[0])
+            basename, extension = os.path.splitext(photo_filename)
+            test_name = photo_filename
+            add_number = 0
+            while test_name in export_photos:
+                add_number = add_number + 1
+                test_name = basename + "(" + str(add_number) + ")" + extension
+            export_photos.append(test_name)
+
+    def photo_in_selectphoto(self, ignore_tags, photos, preset, selected_photos):
+        for photo in selected_photos:
+            if photo[12] != 0:
+                ignore_file = False
+                if ignore_tags:
+                    for tag in ignore_tags:
+                        photo_tags = photo[8].split(',')
+                        if tag in photo_tags:
+                            ignore_file = True
+                if not preset['export_videos']:
+                    path, extension = os.path.splitext(photo[0])
+                    if extension.lower() in movietypes:
+                        ignore_file = True
+                if not ignore_file:
+                    photos.append(photo)
 
     def finish_export(self, *_):
         """Closes the export popup and leaves this screen."""
