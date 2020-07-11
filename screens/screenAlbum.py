@@ -1948,11 +1948,7 @@ class ScreenAlbum(Screen):
                 self.viewer.edit_image.close_video()
 
                 new_original_file = input_file_folder+os.path.sep+'.originals'+os.path.sep+input_filename
-                if not os.path.isdir(input_file_folder+os.path.sep+'.originals'):
-                    os.makedirs(input_file_folder+os.path.sep+'.originals')
-                new_encoded_file = input_file_folder+os.path.sep+output_filename
-
-                new_photoinfo = list(self.photoinfo)
+                new_encoded_file, new_photoinfo = self.osPathIsdir(input_file_folder, output_filename)
                 #check if original file has been backed up already
                 if not os.path.isfile(self.photoinfo[10]):
                     #original file exists
@@ -1973,32 +1969,9 @@ class ScreenAlbum(Screen):
                     self.failed_encode('Could not replace video, original file may be deleted, converted video left in "reencode" subfolder')
                     return
 
-                if not os.listdir(output_file_folder):
-                    os.rmdir(output_file_folder)
+                self.osLustdir(app, new_encoded_file, new_photoinfo, output_file_folder)
 
-                #update screenDatabase
-                extension = os.path.splitext(new_encoded_file)[1]
-                new_photoinfo[0] = os.path.splitext(self.photoinfo[0])[0]+extension  #fix extension
-                new_photoinfo[7] = int(os.path.getmtime(new_encoded_file))  #update modified date
-                new_photoinfo[9] = 1  #set edited
-
-                # regenerate thumbnail
-                app.Photo.thumbnail_update(self.photoinfo[0], self.photoinfo[2], self.photoinfo[7], self.photoinfo[13])
-
-                if self.photoinfo[0] != new_photoinfo[0]:
-                    app.Photo.rename(self.photoinfo[Photo.FULLPATH], new_photoinfo[Photo.FULLPATH], new_photoinfo[Photo.FOLDER])
-                app.Photo.update(new_photoinfo)
-
-                self.dismiss_popup()
-
-                # reload video in ui
-                self.photoinfo = new_photoinfo
-                self.fullpath = local_path(new_photoinfo[0])
-                #self.photo = os.path.join(local_path(new_photoinfo[2]), local_path(new_photoinfo[0]))
-                Clock.schedule_once(lambda *dt: self.set_photo(os.path.join(local_path(new_photoinfo[2]), local_path(new_photoinfo[0]))))
-
-                #Clock.schedule_once(lambda *dt: self.refresh_photolist())
-                Clock.schedule_once(lambda x: app.message("Completed encoding file '"+self.photo+"'"))
+                self.selfphotoIsNewphoto(app, new_photoinfo)
             else:
                 #failed second encode, clean up
                 self.dismiss_popup()
@@ -2031,6 +2004,38 @@ class ScreenAlbum(Screen):
 
         #switch active video in photo list back to image
         self.show_selected()
+
+    def selfphotoIsNewphoto(self, app, new_photoinfo):
+        if self.photoinfo[0] != new_photoinfo[0]:
+            app.Photo.rename(self.photoinfo[Photo.FULLPATH], new_photoinfo[Photo.FULLPATH], new_photoinfo[Photo.FOLDER])
+        app.Photo.update(new_photoinfo)
+        self.dismiss_popup()
+        # reload video in ui
+        self.photoinfo = new_photoinfo
+        self.fullpath = local_path(new_photoinfo[0])
+        # self.photo = os.path.join(local_path(new_photoinfo[2]), local_path(new_photoinfo[0]))
+        Clock.schedule_once(
+            lambda *dt: self.set_photo(os.path.join(local_path(new_photoinfo[2]), local_path(new_photoinfo[0]))))
+        # Clock.schedule_once(lambda *dt: self.refresh_photolist())
+        Clock.schedule_once(lambda x: app.message("Completed encoding file '" + self.photo + "'"))
+
+    def osLustdir(self, app, new_encoded_file, new_photoinfo, output_file_folder):
+        if not os.listdir(output_file_folder):
+            os.rmdir(output_file_folder)
+        # update screenDatabase
+        extension = os.path.splitext(new_encoded_file)[1]
+        new_photoinfo[0] = os.path.splitext(self.photoinfo[0])[0] + extension  # fix extension
+        new_photoinfo[7] = int(os.path.getmtime(new_encoded_file))  # update modified date
+        new_photoinfo[9] = 1  # set edited
+        # regenerate thumbnail
+        app.Photo.thumbnail_update(self.photoinfo[0], self.photoinfo[2], self.photoinfo[7], self.photoinfo[13])
+
+    def osPathIsdir(self, input_file_folder, output_filename):
+        if not os.path.isdir(input_file_folder + os.path.sep + '.originals'):
+            os.makedirs(input_file_folder + os.path.sep + '.originals')
+        new_encoded_file = input_file_folder + os.path.sep + output_filename
+        new_photoinfo = list(self.photoinfo)
+        return new_encoded_file, new_photoinfo
 
     def presetencodingcheck(self, app, encoding_settings, preset_name):
         for preset in app.encoding_presets:
