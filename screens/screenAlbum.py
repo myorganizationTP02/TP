@@ -653,20 +653,7 @@ class ScreenAlbum(Screen):
 
         input_video = MediaPlayer(input_file, ff_opts={'paused': True, 'ss': 1.0, 'an': True})
         frame = None
-        while not frame:
-            frame, value = input_video.get_frame(force_refresh=True)
-        input_metadata = input_video.get_metadata()
-        input_video.close_player()
-        input_video = None
-
-        start_time = time.time()
-        start_point = self.viewer.start_point
-        end_point = self.viewer.end_point
-        framerate = input_metadata['frame_rate']
-        duration = input_metadata['duration']
-        self.total_frames = (duration * (end_point - start_point)) * (framerate[0] / framerate[1])
-        start_seconds = start_point * duration
-        duration_seconds = (end_point * duration) - start_seconds
+        duration_seconds, framerate, input_metadata, start_seconds, start_time = self.NotFrame(frame, input_video)
 
         command, input_file_folder, input_filename, output_file_folder, output_filename = self.Validecommand(app,
                                                                                                              duration_seconds,
@@ -701,34 +688,11 @@ class ScreenAlbum(Screen):
         while True:
             if self.cancel_encoding:
                 self.encoding_process_thread.kill()
-                if os.path.isfile(output_file):
-                    self.delete_output(output_file)
-                if not os.listdir(output_file_folder):
-                    os.rmdir(output_file_folder)
-                self.dismiss_popup()
-                return
+                return self.OsPathFileOrFolder(output_file, output_file_folder)
             nextline = self.encoding_process_thread.stdout.readline()
             if nextline == '' and self.encoding_process_thread.poll() is not None:
                 break
-            if nextline.startswith('frame= '):
-                self.current_frame = int(nextline.split('frame=')[1].split('fps=')[0].strip())
-                scanning_percentage = self.current_frame / self.total_frames * 100
-                self.popup.scanning_percentage = scanning_percentage
-                #time_done = nextline.split('time=')[1].split('bitrate=')[0].strip()
-                elapsed_time = time.time() - start_time
-                time_done = time_index(elapsed_time)
-                remaining_frames = self.total_frames - self.current_frame
-                try:
-                    fps = float(nextline.split('fps=')[1].split('q=')[0].strip())
-                    seconds_left = remaining_frames / fps
-                    time_remaining = time_index(seconds_left)
-                    time_text = "  Time: "+time_done+"  Remaining: "+time_remaining
-                except:
-                    time_text = ""
-                self.popup.scanning_text = str(str(int(scanning_percentage)))+"%"+time_text
-                progress.append(self.current_frame)
-            sys.stdout.write(nextline)
-            sys.stdout.flush()
+            self.NextLineStartswith(nextline, progress, start_time)
 
         output = self.encoding_process_thread.communicate()[0]
         exit_code = self.encoding_process_thread.returncode
@@ -739,26 +703,7 @@ class ScreenAlbum(Screen):
             self.dismiss_popup()
             good_file = True
 
-            if os.path.isfile(output_file):
-                output_video = MediaPlayer(output_file, ff_opts={'paused': True, 'ss': 1.0, 'an': True})
-                frame = None
-                while not frame:
-                    frame, value = output_video.get_frame(force_refresh=True)
-                output_metadata = output_video.get_metadata()
-                output_video.close_player()
-                output_video = None
-                if output_metadata:
-                    if self.encoding_settings['width'] and self.encoding_settings['height']:
-                        new_size = (int(self.encoding_settings['width']), int(self.encoding_settings['height']))
-                        if output_metadata['src_vid_size'] != new_size:
-                            error_code = ', Output size is incorrect'
-                            good_file = False
-                else:
-                    error_code = ', Unable to find output file metadata'
-                    good_file = False
-            else:
-                error_code = ', Output file not found'
-                good_file = False
+            good_file = self.OsPathIsFile(good_file, output_file)
 
             new_original_file = self.notGoodFile(good_file, input_file_folder, input_filename)
             new_encoded_file = self.NotosPath(input_file_folder, output_filename)
@@ -785,6 +730,86 @@ class ScreenAlbum(Screen):
 
         #switch active video in photo list back to image
         self.show_selected()
+
+    def NextLineStartswith(self, nextline, progress, start_time):
+        if nextline.startswith('frame= '):
+            self.current_frame = int(nextline.split('frame=')[1].split('fps=')[0].strip())
+            scanning_percentage = self.current_frame / self.total_frames * 100
+            self.popup.scanning_percentage = scanning_percentage
+            # time_done = nextline.split('time=')[1].split('bitrate=')[0].strip()
+            elapsed_time = time.time() - start_time
+            time_done = time_index(elapsed_time)
+            remaining_frames = self.total_frames - self.current_frame
+            try:
+                fps = float(nextline.split('fps=')[1].split('q=')[0].strip())
+                seconds_left = remaining_frames / fps
+                time_remaining = time_index(seconds_left)
+                time_text = "  Time: " + time_done + "  Remaining: " + time_remaining
+            except:
+                time_text = ""
+            self.popup.scanning_text = str(str(int(scanning_percentage))) + "%" + time_text
+            progress.append(self.current_frame)
+        sys.stdout.write(nextline)
+        sys.stdout.flush()
+
+    def OsPathIsFile(self, good_file, output_file):
+        if os.path.isfile(output_file):
+            output_video = MediaPlayer(output_file, ff_opts={'paused': True, 'ss': 1.0, 'an': True})
+            frame = None
+            output_metadata = self.notFrame(frame, output_video)
+            if output_metadata:
+                good_file = self.EncodingSittings(good_file, output_metadata)
+            else:
+                error_code = ', Unable to find output file metadata'
+                good_file = False
+        else:
+            error_code = ', Output file not found'
+            good_file = False
+        return good_file
+
+    def OsPathFileOrFolder(self, output_file, output_file_folder):
+        if os.path.isfile(output_file):
+            self.delete_output(output_file)
+        if not os.listdir(output_file_folder):
+            os.rmdir(output_file_folder)
+        self.dismiss_popup()
+        return
+
+    def notFrame(self, frame, output_video):
+        while not frame:
+            frame, value = output_video.get_frame(force_refresh=True)
+        output_metadata = output_video.get_metadata()
+        output_video.close_player()
+        output_video = None
+        return output_metadata
+
+    def EncodingSittings(self, good_file, output_metadata):
+        if self.encoding_settings['width'] and self.encoding_settings['height']:
+            new_size = (int(self.encoding_settings['width']), int(self.encoding_settings['height']))
+            good_file = self.ouputmetadaNotNewsize(good_file, new_size, output_metadata)
+        return good_file
+
+    def ouputmetadaNotNewsize(self, good_file, new_size, output_metadata):
+        if output_metadata['src_vid_size'] != new_size:
+            error_code = ', Output size is incorrect'
+            good_file = False
+        return good_file
+
+    def NotFrame(self, frame, input_video):
+        while not frame:
+            frame, value = input_video.get_frame(force_refresh=True)
+        input_metadata = input_video.get_metadata()
+        input_video.close_player()
+        input_video = None
+        start_time = time.time()
+        start_point = self.viewer.start_point
+        end_point = self.viewer.end_point
+        framerate = input_metadata['frame_rate']
+        duration = input_metadata['duration']
+        self.total_frames = (duration * (end_point - start_point)) * (framerate[0] / framerate[1])
+        start_seconds = start_point * duration
+        duration_seconds = (end_point * duration) - start_seconds
+        return duration_seconds, framerate, input_metadata, start_seconds, start_time
 
     def ospathFileOrFolder(self, app, exit_code, output_file, output_file_folder):
         if os.path.isfile(output_file):
