@@ -464,14 +464,7 @@ class ScreenExporting(Screen):
 
         #local directory export mode
         else:
-            if preset['create_subfolder']:
-                save_location = os.path.join(preset['export_folder'], subfolder)
-            else:
-                save_location = preset['export_folder']
-            if not os.path.exists(save_location):
-                os.makedirs(save_location)
-            if preset['export_info']:
-                app.save_photoinfo(self.target, save_location, self.type.lower(), photos=photos, newnames=export_photos)
+            save_location = self.presetcrestesubfolder(app, export_photos, photos, preset, subfolder)
             self.total_export = 0
             for photo in photos:
                 photofile = os.path.join(photo[2], photo[0])
@@ -481,41 +474,7 @@ class ScreenExporting(Screen):
             self.exported_size = 0
             self.total_export_files = len(photos)
             self.export_start_time = time.time()
-            for index, photo in enumerate(photos):
-                self.exported_files = index+1
-                percent_completed = 100*(self.exported_size/self.total_export)
-                self.popup.scanning_percentage = percent_completed
-                if self.cancel_exporting:
-                    self.popup.scanning_text = 'Export Canceled, '+str(index)+' Files Exported'
-                    break
-                photofile = os.path.join(photo[2], photo[0])
-                if os.path.exists(photofile):
-                    photo_size = os.path.getsize(photofile)
-                    extension = os.path.splitext(photofile)[1]
-                    #photofilename = os.path.basename(photofile)
-                    photofilename = export_photos[index]
-                    savefile = os.path.join(save_location, photofilename)
-                    if os.path.exists(savefile):
-                        os.remove(savefile)
-                    if extension.lower() in imagetypes and (preset['scale_image'] or preset['watermark']):
-                        #image needs to be edited in some way
-                        imagedata = Image.open(photofile)
-                        if imagedata.mode != 'RGB':
-                            imagedata = imagedata.convert('RGB')
-                        orientation = photo[13]
-                        imagedata = app.edit_fix_orientation(imagedata, orientation)
-
-                        if preset['scale_image']:
-                            imagedata = app.edit_scale_image(imagedata, preset['scale_size'], preset['scale_size_to'])
-                        if preset['watermark']:
-                            imagedata = app.edit_add_watermark(imagedata, preset['watermark_image'], preset['watermark_opacity'], preset['watermark_horizontal'], preset['watermark_vertical'], preset['watermark_size'])
-                        imagedata.save(savefile, 'JPEG', quality=preset['jpeg_quality'])
-                    else:
-                        #image or video should just be copied
-                        copy2(photofile, savefile)
-                    exported_photos = exported_photos + 1
-                    self.exported_size = self.exported_size+photo_size
-            self.exporting = False
+            self.indexinphoto(app, export_photos, exported_photos, photos, preset, save_location)
         if not self.cancel_exporting:
             app.message('Completed Exporting '+str(len(photos))+' files.')
             Clock.schedule_once(self.finish_export)
@@ -523,6 +482,56 @@ class ScreenExporting(Screen):
             scanning_button = self.popup.ids['scanningButton']
             scanning_button.text = 'OK'
             scanning_button.bind(on_release=self.finish_export)
+
+    def indexinphoto(self, app, export_photos, exported_photos, photos, preset, save_location):
+        for index, photo in enumerate(photos):
+            self.exported_files = index + 1
+            percent_completed = 100 * (self.exported_size / self.total_export)
+            self.popup.scanning_percentage = percent_completed
+            if self.cancel_exporting:
+                self.popup.scanning_text = 'Export Canceled, ' + str(index) + ' Files Exported'
+                break
+            photofile = os.path.join(photo[2], photo[0])
+            if os.path.exists(photofile):
+                photo_size = os.path.getsize(photofile)
+                extension = os.path.splitext(photofile)[1]
+                # photofilename = os.path.basename(photofile)
+                photofilename = export_photos[index]
+                savefile = os.path.join(save_location, photofilename)
+                if os.path.exists(savefile):
+                    os.remove(savefile)
+                if extension.lower() in imagetypes and (preset['scale_image'] or preset['watermark']):
+                    # image needs to be edited in some way
+                    imagedata = Image.open(photofile)
+                    if imagedata.mode != 'RGB':
+                        imagedata = imagedata.convert('RGB')
+                    orientation = photo[13]
+                    imagedata = app.edit_fix_orientation(imagedata, orientation)
+
+                    if preset['scale_image']:
+                        imagedata = app.edit_scale_image(imagedata, preset['scale_size'], preset['scale_size_to'])
+                    if preset['watermark']:
+                        imagedata = app.edit_add_watermark(imagedata, preset['watermark_image'],
+                                                           preset['watermark_opacity'], preset['watermark_horizontal'],
+                                                           preset['watermark_vertical'], preset['watermark_size'])
+                    imagedata.save(savefile, 'JPEG', quality=preset['jpeg_quality'])
+                else:
+                    # image or video should just be copied
+                    copy2(photofile, savefile)
+                exported_photos = exported_photos + 1
+                self.exported_size = self.exported_size + photo_size
+        self.exporting = False
+
+    def presetcrestesubfolder(self, app, export_photos, photos, preset, subfolder):
+        if preset['create_subfolder']:
+            save_location = os.path.join(preset['export_folder'], subfolder)
+        else:
+            save_location = preset['export_folder']
+        if not os.path.exists(save_location):
+            os.makedirs(save_location)
+        if preset['export_info']:
+            app.save_photoinfo(self.target, save_location, self.type.lower(), photos=photos, newnames=export_photos)
+        return save_location
 
     def presetexportinfo(self, app, export_photos, ftp, ftp_filelist, photos, preset):
         if preset['export_info']:
