@@ -374,12 +374,7 @@ class ScreenExporting(Screen):
         #ftp export mode
         if preset['export'] == 'ftp':
             subfolder = subfolder.replace("'", "").replace("/", " - ").replace("\\", " - ")
-            if '/' in preset['ftp_address']:
-                ftp_host, ftp_folder = preset['ftp_address'].split('/', 1)
-                ftp_folder = ftp_folder.strip('/')
-            else:
-                ftp_host = preset['ftp_address']
-                ftp_folder = ''
+            ftp_folder, ftp_host = self.symboleInftp(preset)
             from ftplib import FTP
             try:
                 self.ftp = ftp = FTP()
@@ -423,22 +418,7 @@ class ScreenExporting(Screen):
 
                         if extension.lower() in imagetypes and (preset['scale_image'] or preset['watermark']):
                             #image needs to be edited in some way
-                            imagedata = Image.open(photofile)
-                            if imagedata.mode != 'RGB':
-                                imagedata = imagedata.convert('RGB')
-
-                            orientation = photo[13]
-                            imagedata = app.edit_fix_orientation(imagedata, orientation)
-
-                            if preset['scale_image']:
-                                imagedata = app.edit_scale_image(imagedata, preset['scale_size'], preset['scale_size_to'])
-                            if preset['watermark']:
-                                imagedata = app.edit_add_watermark(imagedata, preset['watermark_image'], preset['watermark_opacity'], preset['watermark_horizontal'], preset['watermark_vertical'], preset['watermark_size'])
-                            output = BytesIO()
-                            imagedata.save(output, 'JPEG', quality=preset['jpeg_quality'])
-                            output.seek(0)
-                            self.current_upload_blocks = 0
-                            ftp.storbinary("STOR "+photofilename, output, callback=self.update_percentage)
+                            self.extention_lower_check(app, ftp, photo, photofile, photofilename, preset)
                         else:
                             #image or video should just be uploaded
                             self.current_upload_blocks = 0
@@ -456,11 +436,7 @@ class ScreenExporting(Screen):
                 ftp.close()
                 self.ftp = False
             except Exception as e:
-                if self.cancel_exporting:
-                    self.popup.scanning_text = 'Canceled Upload. Partial Files May Be Left On The Server.'
-                else:
-                    self.cancel_exporting = True
-                    self.popup.scanning_text = 'Unable To Upload: '+str(e)
+                self.cancelExportin(e)
 
         #local directory export mode
         else:
@@ -482,6 +458,40 @@ class ScreenExporting(Screen):
             scanning_button = self.popup.ids['scanningButton']
             scanning_button.text = 'OK'
             scanning_button.bind(on_release=self.finish_export)
+
+    def extention_lower_check(self, app, ftp, photo, photofile, photofilename, preset):
+        imagedata = Image.open(photofile)
+        if imagedata.mode != 'RGB':
+            imagedata = imagedata.convert('RGB')
+        orientation = photo[13]
+        imagedata = app.edit_fix_orientation(imagedata, orientation)
+        if preset['scale_image']:
+            imagedata = app.edit_scale_image(imagedata, preset['scale_size'], preset['scale_size_to'])
+        if preset['watermark']:
+            imagedata = app.edit_add_watermark(imagedata, preset['watermark_image'], preset['watermark_opacity'],
+                                               preset['watermark_horizontal'], preset['watermark_vertical'],
+                                               preset['watermark_size'])
+        output = BytesIO()
+        imagedata.save(output, 'JPEG', quality=preset['jpeg_quality'])
+        output.seek(0)
+        self.current_upload_blocks = 0
+        ftp.storbinary("STOR " + photofilename, output, callback=self.update_percentage)
+
+    def symboleInftp(self, preset):
+        if '/' in preset['ftp_address']:
+            ftp_host, ftp_folder = preset['ftp_address'].split('/', 1)
+            ftp_folder = ftp_folder.strip('/')
+        else:
+            ftp_host = preset['ftp_address']
+            ftp_folder = ''
+        return ftp_folder, ftp_host
+
+    def cancelExportin(self, e):
+        if self.cancel_exporting:
+            self.popup.scanning_text = 'Canceled Upload. Partial Files May Be Left On The Server.'
+        else:
+            self.cancel_exporting = True
+            self.popup.scanning_text = 'Unable To Upload: ' + str(e)
 
     def indexinphoto(self, app, export_photos, exported_photos, photos, preset, save_location):
         for index, photo in enumerate(photos):
