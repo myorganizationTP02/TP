@@ -760,35 +760,15 @@ class ScreenAlbum(Screen):
                 error_code = ', Output file not found'
                 good_file = False
 
-            if not good_file:
-                Clock.schedule_once(lambda x: app.message('Warning: Encoded file may be bad'+error_code))
-
-            new_original_file = input_file_folder+os.path.sep+'.originals'+os.path.sep+input_filename
-            if not os.path.isdir(input_file_folder+os.path.sep+'.originals'):
-                os.makedirs(input_file_folder+os.path.sep+'.originals')
-            new_encoded_file = input_file_folder+os.path.sep+output_filename
+            new_original_file = self.notGoodFile(good_file, input_file_folder, input_filename)
+            new_encoded_file = self.NotosPath(input_file_folder, output_filename)
             if not os.path.isfile(new_original_file) and os.path.isfile(output_file):
                 try:
                     os.rename(input_file, new_original_file)
                     os.rename(output_file, new_encoded_file)
-                    if not os.listdir(output_file_folder):
-                        os.rmdir(output_file_folder)
-
-                    #update screenDatabase
-                    extension = os.path.splitext(output_file)[1]
-                    new_photoinfo = list(self.photoinfo)
-                    new_photoinfo[0] = os.path.splitext(self.photoinfo[0])[0]+extension  #fix extension
-                    new_photoinfo[7] = int(os.path.getmtime(new_encoded_file))  #update modified date
-                    new_photoinfo[9] = 1  #set edited
-                    new_photoinfo[10] = new_original_file  #set original file
-                    if self.photoinfo[0] != new_photoinfo[0]:
-                        app.Photo.rename(self.photoinfo[0], new_photoinfo[0], new_photoinfo[1])
-                    app.Photo.update(new_photoinfo)
-
-                    # reload video in ui
-                    self.fullpath = local_path(new_photoinfo[0])
-                    newpath = os.path.join(local_path(new_photoinfo[2]), local_path(new_photoinfo[0]))
-                    Clock.schedule_once(lambda x: self.set_photo(newpath))
+                    new_photoinfo = self.NotOsListdir(new_encoded_file, new_original_file, output_file,
+                                                      output_file_folder)
+                    self.photoinfoNotNew(app, new_photoinfo)
 
                 except:
                     app.popup_message(text='Could not replace original file', title='Warning')
@@ -799,16 +779,52 @@ class ScreenAlbum(Screen):
             Clock.schedule_once(lambda x: app.message("Completed encoding file '"+self.photo+"'"))
         else:
             self.dismiss_popup()
-            if os.path.isfile(output_file):
-                self.delete_output(output_file)
-            if not os.listdir(output_file_folder):
-                os.rmdir(output_file_folder)
-            app.popup_message(text='File not encoded, FFMPEG gave exit code '+str(exit_code), title='Warning')
+            self.ospathFileOrFolder(app, exit_code, output_file, output_file_folder)
 
         self.encoding = False
 
         #switch active video in photo list back to image
         self.show_selected()
+
+    def ospathFileOrFolder(self, app, exit_code, output_file, output_file_folder):
+        if os.path.isfile(output_file):
+            self.delete_output(output_file)
+        if not os.listdir(output_file_folder):
+            os.rmdir(output_file_folder)
+        app.popup_message(text='File not encoded, FFMPEG gave exit code ' + str(exit_code), title='Warning')
+
+    def photoinfoNotNew(self, app, new_photoinfo):
+        if self.photoinfo[0] != new_photoinfo[0]:
+            app.Photo.rename(self.photoinfo[0], new_photoinfo[0], new_photoinfo[1])
+        app.Photo.update(new_photoinfo)
+        # reload video in ui
+        self.fullpath = local_path(new_photoinfo[0])
+        newpath = os.path.join(local_path(new_photoinfo[2]), local_path(new_photoinfo[0]))
+        Clock.schedule_once(lambda x: self.set_photo(newpath))
+
+    def NotOsListdir(self, new_encoded_file, new_original_file, output_file, output_file_folder):
+        if not os.listdir(output_file_folder):
+            os.rmdir(output_file_folder)
+        # update screenDatabase
+        extension = os.path.splitext(output_file)[1]
+        new_photoinfo = list(self.photoinfo)
+        new_photoinfo[0] = os.path.splitext(self.photoinfo[0])[0] + extension  # fix extension
+        new_photoinfo[7] = int(os.path.getmtime(new_encoded_file))  # update modified date
+        new_photoinfo[9] = 1  # set edited
+        new_photoinfo[10] = new_original_file  # set original file
+        return new_photoinfo
+
+    def NotosPath(self, input_file_folder, output_filename):
+        if not os.path.isdir(input_file_folder + os.path.sep + '.originals'):
+            os.makedirs(input_file_folder + os.path.sep + '.originals')
+        new_encoded_file = input_file_folder + os.path.sep + output_filename
+        return new_encoded_file
+
+    def notGoodFile(self, good_file, input_file_folder, input_filename):
+        if not good_file:
+            Clock.schedule_once(lambda x: app.message('Warning: Encoded file may be bad' + error_code))
+        new_original_file = input_file_folder + os.path.sep + '.originals' + os.path.sep + input_filename
+        return new_original_file
 
     def Validecommand(self, app, duration_seconds, framerate, input_file, input_metadata, start_seconds):
         pixel_format = input_metadata['src_pix_fmt']
@@ -1982,14 +1998,7 @@ class ScreenAlbum(Screen):
                 app.popup_message(text='Second file not encoded, FFMPEG gave exit code '+str(exit_code), title='Warning')
                 return
         else:
-            #failed first encode, clean up
-            self.failed_encode('First file not encoded, FFMPEG gave exit code '+str(exit_code))
-            deleted = self.delete_output(output_file)
-            if not os.listdir(output_file_folder):
-                try:
-                    os.rmdir(output_file_folder)
-                except:
-                    pass
+            self.osListdir(exit_code, output_file, output_file_folder)
         if self.encoding_process_thread:
             self.encoding_process_thread.kill()
 
@@ -2004,6 +2013,16 @@ class ScreenAlbum(Screen):
 
         #switch active video in photo list back to image
         self.show_selected()
+
+    def osListdir(self, exit_code, output_file, output_file_folder):
+        # failed first encode, clean up
+        self.failed_encode('First file not encoded, FFMPEG gave exit code ' + str(exit_code))
+        deleted = self.delete_output(output_file)
+        if not os.listdir(output_file_folder):
+            try:
+                os.rmdir(output_file_folder)
+            except:
+                pass
 
     def selfphotoIsNewphoto(self, app, new_photoinfo):
         if self.photoinfo[0] != new_photoinfo[0]:
