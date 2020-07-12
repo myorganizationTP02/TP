@@ -451,8 +451,7 @@ class ScreenAlbum(Screen):
 
         self.encoding = False
         self.cancel_encoding = True
-        if self.encoding_process_thread:
-            self.encoding_process_thread.kill()
+        self.EndingProcess()
         app = App.get_running_app()
         app.message("Canceled encoding.")
 
@@ -1803,8 +1802,7 @@ class ScreenAlbum(Screen):
 
         self.encoding = False
         self.cancel_encoding = True
-        if self.encoding_process_thread:
-            self.encoding_process_thread.kill()
+        self.EndingProcess()
         app = App.get_running_app()
         app.message("Canceled video processing.")
 
@@ -1990,8 +1988,7 @@ class ScreenAlbum(Screen):
                 return self.oslistdirnotfolder(app, exit_code, output_file_folder)
         else:
             self.osListdir(exit_code, output_file, output_file_folder)
-        if self.encoding_process_thread:
-            self.encoding_process_thread.kill()
+        self.EndingProcess()
 
         #regenerate thumbnail
         app.Photo.thumbnail_update(self.photoinfo[0], self.photoinfo[2], self.photoinfo[7], self.photoinfo[13])
@@ -2004,6 +2001,10 @@ class ScreenAlbum(Screen):
 
         #switch active video in photo list back to image
         self.show_selected()
+
+    def EndingProcess(self):
+        if self.encoding_process_thread:
+            self.encoding_process_thread.kill()
 
     def LineInLines(self, frame_number, lines, output_file, output_file_folder):
         for line in lines:
