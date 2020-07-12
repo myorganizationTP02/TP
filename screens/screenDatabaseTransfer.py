@@ -410,24 +410,7 @@ class ScreenDatabaseTransfer(Screen):
             for folder in unsorted_folders:
                 sortby = 0
                 folderpath = folder
-                if sort_method == 'Amount':
-                    sortby = len(app.Photo.by_folder(folderpath, database=database_folder))
-                elif sort_method == 'Title':
-                    folderinfo = app.Folder.exist(folderpath)
-                    if folderinfo:
-                        sortby = folderinfo[1]
-                    else:
-                        sortby = folderpath
-                elif sort_method == 'Imported':
-                    folder_photos = app.Photo.by_folder(folderpath, database=database_folder)
-                    for folder_photo in folder_photos:
-                        if folder_photo[6] > sortby:
-                            sortby = folder_photo[6]
-                elif sort_method == 'Modified':
-                    folder_photos = app.Photo.by_folder(folderpath, database=database_folder)
-                    for folder_photo in folder_photos:
-                        if folder_photo[7] > sortby:
-                            sortby = folder_photo[7]
+                sortby = self.sorthmethod(app, database_folder, folderpath, sort_method, sortby)
 
                 folders.append([sortby, folderpath])
             sorted_folders = sorted(folders, key=lambda x: x[0], reverse=sort_reverse)
@@ -468,6 +451,27 @@ class ScreenDatabaseTransfer(Screen):
         data = data + folder_data
 
         database.data = data
+
+    def sorthmethod(self, app, database_folder, folderpath, sort_method, sortby):
+        if sort_method == 'Amount':
+            sortby = len(app.Photo.by_folder(folderpath, database=database_folder))
+        elif sort_method == 'Title':
+            folderinfo = app.Folder.exist(folderpath)
+            if folderinfo:
+                sortby = folderinfo[1]
+            else:
+                sortby = folderpath
+        elif sort_method == 'Imported':
+            folder_photos = app.Photo.by_folder(folderpath, database=database_folder)
+            for folder_photo in folder_photos:
+                if folder_photo[6] > sortby:
+                    sortby = folder_photo[6]
+        elif sort_method == 'Modified':
+            folder_photos = app.Photo.by_folder(folderpath, database=database_folder)
+            for folder_photo in folder_photos:
+                if folder_photo[7] > sortby:
+                    sortby = folder_photo[7]
+        return sortby
 
     def populate_folders(self, folder_root, expanded, sort_method, sort_reverse, database_folder):
         app = App.get_running_app()
