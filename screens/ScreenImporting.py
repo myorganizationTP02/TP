@@ -447,17 +447,9 @@ class ScreenImporting(Screen):
 
                     seconds_elapsed = time.time() - self.start_time
                     time_elapsed = '  Time: ' + str(datetime.timedelta(seconds=int(seconds_elapsed)))
-                    if self.percent_completed > 0:
-                        seconds_remain = (seconds_elapsed * remaining) / completed
-                        time_remain = '  Remaining: ' + str(datetime.timedelta(seconds=int(seconds_remain)))
-                    else:
-                        time_remain = ''
-                    self.scanningpopup.scanning_text = "Importing " + format_size(total_size) + '  ' + str(
-                        int(self.percent_completed)) + '%  ' + time_elapsed + time_remain
-                    old_full_filename = os.path.join(photo[2], photo[0])
-                    new_photo_fullpath = os.path.join(folder_name, photo[10])
-                    new_full_filename = os.path.join(import_to, new_photo_fullpath)
-                    thumbnail_data = app.Photo.thumbnail(photo[2], temporary=True)
+                    new_full_filename, new_photo_fullpath, old_full_filename, thumbnail_data = self.percentcompleted(
+                        app, completed, folder_name, import_to, photo, remaining, seconds_elapsed, time_elapsed,
+                        total_size)
                     if not app.Photo.exist(new_photo_fullpath):
                         photo[0] = new_photo_fullpath
                         photo[1] = folder_name
@@ -507,6 +499,21 @@ class ScreenImporting(Screen):
         self.scanningpopup = None
         self.import_scanning = False
         Clock.schedule_once(lambda *dt: app.show_database())
+
+    def percentcompleted(self, app, completed, folder_name, import_to, photo, remaining, seconds_elapsed, time_elapsed,
+                         total_size):
+        if self.percent_completed > 0:
+            seconds_remain = (seconds_elapsed * remaining) / completed
+            time_remain = '  Remaining: ' + str(datetime.timedelta(seconds=int(seconds_remain)))
+        else:
+            time_remain = ''
+        self.scanningpopup.scanning_text = "Importing " + format_size(total_size) + '  ' + str(
+            int(self.percent_completed)) + '%  ' + time_elapsed + time_remain
+        old_full_filename = os.path.join(photo[2], photo[0])
+        new_photo_fullpath = os.path.join(folder_name, photo[10])
+        new_full_filename = os.path.join(import_to, new_photo_fullpath)
+        thumbnail_data = app.Photo.thumbnail(photo[2], temporary=True)
+        return new_full_filename, new_photo_fullpath, old_full_filename, thumbnail_data
 
     def ospathisdir(self, app, folderinfo, path):
         if not os.path.isdir(path):
