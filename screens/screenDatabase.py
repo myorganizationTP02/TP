@@ -591,7 +591,7 @@ class ScreenDatabase(Screen):
 
         del instance
         if answer == 'yes':
-            app = App.get_running_app()
+            app.get_running_app()
             selected_photos = self.get_selected_photos()
             if self.type == 'Tag':
                 for photo in selected_photos:
