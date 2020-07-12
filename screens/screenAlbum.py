@@ -1894,13 +1894,7 @@ class ScreenAlbum(Screen):
             except:
                 if not self.cancel_encoding:
                     lines = self.encoding_process_thread.stdout.readlines()
-                    for line in lines:
-                        sys.stdout.write(line)
-                        sys.stdout.flush()
-                    deleted = self.delete_output(output_file)
-                    self.osNotFolder(output_file_folder)
-                    self.failed_encode('Ffmpeg shut down, failed encoding on frame: '+str(frame_number))
-                    return
+                    return self.LineInLines(frame_number, lines, output_file, output_file_folder)
             #output_file = output_file_folder+os.path.sep+'image'+str(frame_number).zfill(4)+'.jpg'
             #frame.save(output_file, "JPEG", quality=95)
             frame_number = frame_number+1
@@ -2010,6 +2004,15 @@ class ScreenAlbum(Screen):
 
         #switch active video in photo list back to image
         self.show_selected()
+
+    def LineInLines(self, frame_number, lines, output_file, output_file_folder):
+        for line in lines:
+            sys.stdout.write(line)
+            sys.stdout.flush()
+        deleted = self.delete_output(output_file)
+        self.osNotFolder(output_file_folder)
+        self.failed_encode('Ffmpeg shut down, failed encoding on frame: ' + str(frame_number))
+        return
 
     def oslistdir(self, output_file_folder):
         if not os.listdir(output_file_folder):
