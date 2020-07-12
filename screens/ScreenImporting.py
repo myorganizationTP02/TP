@@ -383,26 +383,26 @@ class ScreenImporting(Screen):
         """Cancel the import process."""
         self.cancel_scanning = True
 
-    def finalize_import(self):
-        raise ValueError("should not call this function anymore because the load is done on preset selection")
+    #def finalize_import(self):
+     #   raise ValueError("should not call this function anymore because the load is done on preset selection")
 
-        """Begin the final stage of the import - copying files."""
-        app = App.get_running_app()
+      #  """Begin the final stage of the import - copying files."""
+       # app = App.get_running_app()
 
-        # Create popup to show importing progress
-        self.cancel_scanning = False
-        self.scanningpopup = ScanningPopup(title='Importing Files', auto_dismiss=False, size_hint=(None, None),
-                                           size=(app.popup_x, app.button_scale * 4))
-        self.scanningpopup.open()
-        scanning_button = self.scanningpopup.ids['scanningButton']
-        scanning_button.bind(on_release=self.cancel_import)
+        ## Create popup to show importing progress
+        #self.cancel_scanning = False
+        #self.scanningpopup = ScanningPopup(title='Importing Files', auto_dismiss=False, size_hint=(None, None),
+                                         #  size=(app.popup_x, app.button_scale * 4))
+       # self.scanningpopup.open()
+        # scanning_button = self.scanningpopup.ids['scanningButton']
+        # scanning_button.bind(on_release=self.cancel_import)
 
         # Start importing thread
-        self.percent_completed = 0
-        self.scanningthread = threading.Thread(target=self.importing_process)
-        self.import_scanning = True
-        self.scanningthread.start()
-        self.start_time = time.time()
+        # self.percent_completed = 0
+        # self.scanningthread = threading.Thread(target=self.importing_process)
+        # self.import_scanning = True
+        # self.scanningthread.start()
+        # self.start_time = time.time()
 
     def importing_process(self):
         """Function that actually imports the files."""
