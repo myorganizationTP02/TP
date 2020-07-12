@@ -462,10 +462,7 @@ class ScreenImporting(Screen):
                             failed_files = failed_files + 1
                             imported_size = imported_size + photo[4]
                         else:
-                            if self.delete_originals:
-                                if os.path.isfile(new_full_filename):
-                                    if os.path.getsize(new_full_filename) == os.path.getsize(old_full_filename):
-                                        os.remove(old_full_filename)
+                            self.newoldfile(new_full_filename, old_full_filename)
                             app.Photo.add(photo)
                             # app.database_imported_add(photo[0], photo[10], photo[3])
                             if thumbnail_data:
@@ -499,6 +496,12 @@ class ScreenImporting(Screen):
         self.scanningpopup = None
         self.import_scanning = False
         Clock.schedule_once(lambda *dt: app.show_database())
+
+    def newoldfile(self, new_full_filename, old_full_filename):
+        if self.delete_originals:
+            if os.path.isfile(new_full_filename):
+                if os.path.getsize(new_full_filename) == os.path.getsize(old_full_filename):
+                    os.remove(old_full_filename)
 
     def percentcompleted(self, app, completed, folder_name, import_to, photo, remaining, seconds_elapsed, time_elapsed,
                          total_size):
