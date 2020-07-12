@@ -1,3 +1,5 @@
+from kivy import app
+
 from screenAlbum.EditColorImageAdvanced import EditColorImageAdvanced
 from screenAlbum.EditConvertImage import EditConvertImage
 from screenAlbum.EditConvertVideo import EditConvertVideo
@@ -864,6 +866,7 @@ class ScreenAlbum(Screen):
         return new_encoded_file
 
     def notGoodFile(self, good_file, input_file_folder, input_filename):
+        error_code = ''
         if not good_file:
             Clock.schedule_once(lambda x: app.message('Warning: Encoded file may be bad' + error_code))
         new_original_file = input_file_folder + os.path.sep + '.originals' + os.path.sep + input_filename
