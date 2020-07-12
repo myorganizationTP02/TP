@@ -1,3 +1,4 @@
+from kivy import app
 from kivy.clock import Clock
 from kivy.cache import Cache
 from kivy.animation import Animation
@@ -416,13 +417,14 @@ class ScreenDatabase(Screen):
     def on_sort_reverse(self, *_):
         """Updates the sort reverse button's state variable, since kivy doesnt just use True/False for button states."""
 
-        app = App.get_running_app()
+        from kivy import app
+        app.get_running_app()
         self.sort_reverse_button = 'down' if to_bool(app.config.get('Sorting', 'database_sort_reverse')) else 'normal'
 
     def on_album_sort_reverse(self, *_):
         """Updates the sort reverse button's state variable, since kivy doesnt just use True/False for button states."""
 
-        app = App.get_running_app()
+        app.get_running_app()
         sort_reverse = to_bool(app.config.get('Sorting', 'album_sort_reverse'))
         self.album_sort_reverse_button = 'down' if sort_reverse else 'normal'
 
@@ -430,7 +432,7 @@ class ScreenDatabase(Screen):
         """Switches the app to export mode with the current selected album."""
 
         if self.selected and self.type != 'None':
-            app = App.get_running_app()
+            app.get_running_app()
             app.export_target = self.selected
             app.export_type = self.type
             app.show_export()
