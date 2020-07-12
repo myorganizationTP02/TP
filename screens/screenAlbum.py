@@ -1883,9 +1883,7 @@ class ScreenAlbum(Screen):
                 self.dismiss_popup()
                 self.encoding_process_thread.kill()
                 deleted = self.delete_output(output_file)
-                if not os.listdir(output_file_folder):
-                    os.rmdir(output_file_folder)
-                return
+                return self.osListdirOutput(output_file_folder)
             frameinfo = edit_image.get_converted_frame()
             if frameinfo is None:
                 #finished encoding
@@ -1900,11 +1898,7 @@ class ScreenAlbum(Screen):
                         sys.stdout.write(line)
                         sys.stdout.flush()
                     deleted = self.delete_output(output_file)
-                    if not os.listdir(output_file_folder):
-                        try:
-                            os.rmdir(output_file_folder)
-                        except:
-                            pass
+                    self.osNotFolder(output_file_folder)
                     self.failed_encode('Ffmpeg shut down, failed encoding on frame: '+str(frame_number))
                     return
             #output_file = output_file_folder+os.path.sep+'image'+str(frame_number).zfill(4)+'.jpg'
@@ -1949,31 +1943,12 @@ class ScreenAlbum(Screen):
                     self.encoding_process_thread.kill()
                     deleted = self.delete_output(output_file)
                     deleted = self.delete_output(output_temp_file)
-                    if not os.listdir(output_file_folder):
-                        try:
-                            os.rmdir(output_file_folder)
-                        except:
-                            pass
-                    return
+                    return self.oslistdir(output_file_folder)
 
                 nextline = self.encoding_process_thread.stdout.readline()
                 if nextline == '' and self.encoding_process_thread.poll() is not None:
                     break
-                if nextline.startswith('frame= '):
-                    self.current_frame = int(nextline.split('frame=')[1].split('fps=')[0].strip())
-                    scanning_percentage = 95 + ((self.current_frame - start_frame) / self.total_frames * 5)
-                    self.popup.scanning_percentage = scanning_percentage
-                    elapsed_time = time.time() - start_time
-
-                    try:
-                        percentage_remaining = 95 - scanning_percentage
-                        seconds_left = (elapsed_time * percentage_remaining) / scanning_percentage
-                        time_done = time_index(elapsed_time)
-                        time_remaining = time_index(seconds_left)
-                        time_text = "  Time: " + time_done + "  Remaining: " + time_remaining
-                    except:
-                        time_text = ""
-                    self.popup.scanning_text = str(int(scanning_percentage)) + "%" + time_text
+                self.nextlineStartswith(nextline, start_frame, start_time)
 
                 sys.stdout.write(nextline)
                 sys.stdout.flush()
@@ -2018,10 +1993,7 @@ class ScreenAlbum(Screen):
                 self.dismiss_popup()
                 self.delete_output(output_file)
                 self.delete_output(output_temp_file)
-                if not os.listdir(output_file_folder):
-                    os.rmdir(output_file_folder)
-                app.popup_message(text='Second file not encoded, FFMPEG gave exit code '+str(exit_code), title='Warning')
-                return
+                return self.oslistdirnotfolder(app, exit_code, output_file_folder)
         else:
             self.osListdir(exit_code, output_file, output_file_folder)
         if self.encoding_process_thread:
@@ -2038,6 +2010,49 @@ class ScreenAlbum(Screen):
 
         #switch active video in photo list back to image
         self.show_selected()
+
+    def oslistdir(self, output_file_folder):
+        if not os.listdir(output_file_folder):
+            try:
+                os.rmdir(output_file_folder)
+            except:
+                pass
+        return
+
+    def oslistdirnotfolder(self, app, exit_code, output_file_folder):
+        if not os.listdir(output_file_folder):
+            os.rmdir(output_file_folder)
+        app.popup_message(text='Second file not encoded, FFMPEG gave exit code ' + str(exit_code), title='Warning')
+        return
+
+    def nextlineStartswith(self, nextline, start_frame, start_time):
+        if nextline.startswith('frame= '):
+            self.current_frame = int(nextline.split('frame=')[1].split('fps=')[0].strip())
+            scanning_percentage = 95 + ((self.current_frame - start_frame) / self.total_frames * 5)
+            self.popup.scanning_percentage = scanning_percentage
+            elapsed_time = time.time() - start_time
+
+            try:
+                percentage_remaining = 95 - scanning_percentage
+                seconds_left = (elapsed_time * percentage_remaining) / scanning_percentage
+                time_done = time_index(elapsed_time)
+                time_remaining = time_index(seconds_left)
+                time_text = "  Time: " + time_done + "  Remaining: " + time_remaining
+            except:
+                time_text = ""
+            self.popup.scanning_text = str(int(scanning_percentage)) + "%" + time_text
+
+    def osNotFolder(self, output_file_folder):
+        if not os.listdir(output_file_folder):
+            try:
+                os.rmdir(output_file_folder)
+            except:
+                pass
+
+    def osListdirOutput(self, output_file_folder):
+        if not os.listdir(output_file_folder):
+            os.rmdir(output_file_folder)
+        return
 
     def osListdir(self, exit_code, output_file, output_file_folder):
         # failed first encode, clean up
