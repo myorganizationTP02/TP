@@ -49,6 +49,7 @@ from generalElements.images.AsyncThumbnail import AsyncThumbnail
 
 from kivy.lang.builder import Builder
 import platform
+import os
 
 Builder.load_string("""
 
