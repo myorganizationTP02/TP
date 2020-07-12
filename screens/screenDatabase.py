@@ -1314,7 +1314,7 @@ class ScreenDatabase(Screen):
         self.album_sort_method = method
         app.get_running_app()
         app.config.set('Sorting', 'album_sort', method)
-        self.on_selected('', '')
+        self.on_selected('')
 
     def album_resort_reverse(self, reverse):
         """Sets the album sort reverse.
@@ -1326,7 +1326,7 @@ class ScreenDatabase(Screen):
         album_sort_reverse = True if reverse == 'down' else False
         app.config.set('Sorting', 'album_sort_reverse', album_sort_reverse)
         self.album_sort_reverse = album_sort_reverse
-        self.on_selected('', '')
+        self.on_selected('')
 
     def on_enter(self, *_):
         """Called when the screen is entered.
