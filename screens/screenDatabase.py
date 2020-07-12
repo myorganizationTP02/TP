@@ -1240,14 +1240,15 @@ class ScreenDatabase(Screen):
         """Called when the selected folder/album/tag is changed.
         Clears and draws the photo list.
         """
-        app.get_running_app()
+        # app.get_running_app()
 
         if self.parent and self.ids:
             self.selected_item = selected_treeViewItem
             # dragable = False
             # photos_area = self.ids['photos']
             # photos_area.clear_selection()
-            app = App.get_running_app()
+
+            app.get_running_app()
 
             folder_title_type = self.ids['folderType']
             folder_title_type.text = selected_treeViewItem.item.__class__.__name__
