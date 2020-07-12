@@ -571,18 +571,10 @@ class ScreenAlbum(Screen):
             resize_settings = 'scale='+resize_width+":"+resize_height
         else:
             resize_settings = ''
-        if deinterlace:
-            deinterlace_settings = "yadif"
-        else:
-            deinterlace_settings = ""
+        deinterlace_settings = self.deinterlacecheck(deinterlace)
         if deinterlace_settings or resize_settings:
             filter_settings = ' -vf "'
-            if deinterlace_settings:
-                filter_settings = filter_settings+deinterlace_settings
-                if resize_settings:
-                    filter_settings = filter_settings+', '+resize_settings
-            else:
-                filter_settings = filter_settings+resize_settings
+            filter_settings = self.settings(deinterlace_settings, filter_settings, resize_settings)
             filter_settings = filter_settings+'" '
         else:
             filter_settings = ""
@@ -615,6 +607,22 @@ class ScreenAlbum(Screen):
             #command = 'ffmpeg '+file_format_settings+' -i "'+input_file+'"'+filter_settings+' -sn '+speed_setting+' '+video_codec_settings+' '+audio_codec_settings+' '+framerate_setting+' '+pixel_format_setting+' '+video_bitrate_settings+' '+audio_bitrate_settings+' "'+output_file+'"'
             command = 'ffmpeg'+seek+' '+input_format_settings+' -i "'+input_file+'" '+file_format_settings+' '+filter_settings+' -sn '+speed_setting+' '+video_codec_settings+' '+audio_codec_settings+' '+framerate_setting+' '+pixel_format_setting+' '+video_bitrate_settings+' '+audio_bitrate_settings+duration+' "'+output_file+'"'
         return [True, command, output_filename]
+
+    def deinterlacecheck(self, deinterlace):
+        if deinterlace:
+            deinterlace_settings = "yadif"
+        else:
+            deinterlace_settings = ""
+        return deinterlace_settings
+
+    def settings(self, deinterlace_settings, filter_settings, resize_settings):
+        if deinterlace_settings:
+            filter_settings = filter_settings + deinterlace_settings
+            if resize_settings:
+                filter_settings = filter_settings + ', ' + resize_settings
+        else:
+            filter_settings = filter_settings + resize_settings
+        return filter_settings
 
     def paramcheck(self, duration, input_file, input_filename, input_folder, input_framerate, input_images,
                    input_pixel_format, start, video_codec):
