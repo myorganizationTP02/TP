@@ -48,6 +48,7 @@ from generalElements.treeviews.RecycleTreeViewButton import RecycleTreeViewButto
 from generalElements.images.AsyncThumbnail import AsyncThumbnail
 
 from kivy.lang.builder import Builder
+import platform
 
 Builder.load_string("""
 
