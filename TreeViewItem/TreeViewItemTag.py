@@ -9,9 +9,9 @@ class TreeViewItemTag(TreeViewItem):
     indent = 1
     can_rename_folder = True
     can_delete_folder = True
-    screenDatabase = ''
 
-    def visit(self, screenDatabase):
+
+    def visit(self,screenDatabase):
         super(TreeViewItemTag, self).visit()
 
         screenDatabase = self.owner
