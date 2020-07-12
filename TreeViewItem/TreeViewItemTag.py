@@ -10,7 +10,7 @@ class TreeViewItemTag(TreeViewItem):
     can_delete_folder = True
 
 
-    def visit(self,screenDatabase):
+    def visit(self,screenDatabase=[]):
         super(TreeViewItemTag, self).visit()
 
         screenDatabase = self.owner
