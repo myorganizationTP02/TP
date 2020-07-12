@@ -750,7 +750,7 @@ class ScreenDatabase(Screen):
             self.select_none()
             if added_tag:
                 if tag.name == 'favorite':
-                    self.on_selected()
+                    self.on_selected(self.selected_item)
 
                 app.session.commit()
                 # self.create_treeview()
