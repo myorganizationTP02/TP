@@ -26,9 +26,8 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c18f69a3-776f-4dd6-998c-4d459ba95fe2" name="Default Changelist" comment="RefreshPhotoFull">
+    <list default="true" id="c18f69a3-776f-4dd6-998c-4d459ba95fe2" name="Default Changelist" comment="cameraaperature">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/ScreenImporting.py" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ScreenImporting.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,55 +56,6 @@
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
-  </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <option name="HIDDEN_KINDS">
-      <set />
-    </option>
-    <expand>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="location_test_db" type="feb32156:DbDataSourceImpl" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="location_test_db" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="location_test_db" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="location_test_db" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
-        <item name="locations: table" type="3d80ac25:SqliteImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="location_test_db" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
-        <item name="locations_photos: table" type="3d80ac25:SqliteImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="location_test_db" type="feb32156:DbDataSourceImpl" />
-        <item name="collations" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-    </expand>
-    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -530,21 +480,7 @@
       <workItem from="1588173454554" duration="485000" />
       <workItem from="1588177000108" duration="1033000" />
       <workItem from="1594235213622" duration="10041000" />
-      <workItem from="1594408621173" duration="17727000" />
-    </task>
-    <task id="LOCAL-00001" summary="update ignore file">
-      <created>1588177324193</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1588177324193</updated>
-    </task>
-    <task id="LOCAL-00002" summary="update ignore file">
-      <created>1594236109639</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1594236109639</updated>
+      <workItem from="1594408621173" duration="29330000" />
     </task>
     <task id="LOCAL-00003" summary="update ignore file1">
       <created>1594236473742</created>
@@ -714,7 +650,182 @@
       <option name="project" value="LOCAL" />
       <updated>1594529471328</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="importingprocess27">
+      <created>1594530886669</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1594530886669</updated>
+    </task>
+    <task id="LOCAL-00028" summary="importingprocess27">
+      <created>1594531126850</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1594531126850</updated>
+    </task>
+    <task id="LOCAL-00029" summary="importingprocess27">
+      <created>1594531363090</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1594531363090</updated>
+    </task>
+    <task id="LOCAL-00030" summary="importingprocess27">
+      <created>1594531544791</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1594531544791</updated>
+    </task>
+    <task id="LOCAL-00031" summary="get_ffmpeg_command27">
+      <created>1594532029094</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1594532029094</updated>
+    </task>
+    <task id="LOCAL-00032" summary="get_ffmpeg_command27">
+      <created>1594532328124</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1594532328124</updated>
+    </task>
+    <task id="LOCAL-00033" summary="get_ffmpeg_command27">
+      <created>1594532514141</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1594532514141</updated>
+    </task>
+    <task id="LOCAL-00034" summary="sceenimportingdropwidget">
+      <created>1594533017956</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1594533017956</updated>
+    </task>
+    <task id="LOCAL-00035" summary="hookeyboard">
+      <created>1594567786763</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1594567786763</updated>
+    </task>
+    <task id="LOCAL-00036" summary="refreshdatabasearea">
+      <created>1594568379137</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1594568379137</updated>
+    </task>
+    <task id="LOCAL-00037" summary="screendatabasebugs">
+      <created>1594569130182</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1594569130182</updated>
+    </task>
+    <task id="LOCAL-00038" summary="correct2NewBugs">
+      <created>1594571210861</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1594571210861</updated>
+    </task>
+    <task id="LOCAL-00039" summary="mainBugs">
+      <created>1594571889977</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1594571889977</updated>
+    </task>
+    <task id="LOCAL-00040" summary="bugsstrupdatepercentage">
+      <created>1594572433562</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1594572433562</updated>
+    </task>
+    <task id="LOCAL-00041" summary="RemoveUnusedCode">
+      <created>1594573154319</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1594573154319</updated>
+    </task>
+    <task id="LOCAL-00042" summary="RemoveUnusedCode">
+      <created>1594573389631</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1594573389631</updated>
+    </task>
+    <task id="LOCAL-00043" summary="visitscreen">
+      <created>1594573649906</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1594573649906</updated>
+    </task>
+    <task id="LOCAL-00044" summary="visitscreen">
+      <created>1594573841464</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1594573841464</updated>
+    </task>
+    <task id="LOCAL-00045" summary="visitscreen">
+      <created>1594574112821</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1594574112821</updated>
+    </task>
+    <task id="LOCAL-00046" summary="ospath">
+      <created>1594575164678</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1594575164678</updated>
+    </task>
+    <task id="LOCAL-00047" summary="platform">
+      <created>1594575425017</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1594575425017</updated>
+    </task>
+    <task id="LOCAL-00048" summary="importos">
+      <created>1594575604016</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1594575604016</updated>
+    </task>
+    <task id="LOCAL-00049" summary="symble">
+      <created>1594575979304</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1594575979304</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Fileinfo">
+      <created>1594576607718</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1594576607719</updated>
+    </task>
+    <task id="LOCAL-00051" summary="cameraaperature">
+      <created>1594576903786</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1594576903786</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TodoView">
@@ -792,8 +903,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="update ignore file" />
-    <MESSAGE value="update ignore file1" />
     <MESSAGE value="update ignore file03" />
     <MESSAGE value="update ignore file04" />
     <MESSAGE value="encodeprocess30" />
@@ -802,9 +911,30 @@
     <MESSAGE value="ScreenAlbumEncodeprocess29" />
     <MESSAGE value="saveVidoProcess" />
     <MESSAGE value="RefreshPhotoFull" />
-    <option name="LAST_COMMIT_MESSAGE" value="RefreshPhotoFull" />
+    <MESSAGE value="importingprocess27" />
+    <MESSAGE value="get_ffmpeg_command27" />
+    <MESSAGE value="sceenimportingdropwidget" />
+    <MESSAGE value="hookeyboard" />
+    <MESSAGE value="refreshdatabasearea" />
+    <MESSAGE value="screendatabasebugs" />
+    <MESSAGE value="correct2NewBugs" />
+    <MESSAGE value="mainBugs" />
+    <MESSAGE value="bugsstrupdatepercentage" />
+    <MESSAGE value="RemoveUnusedCode" />
+    <MESSAGE value="visitscreen" />
+    <MESSAGE value="ospath" />
+    <MESSAGE value="platform" />
+    <MESSAGE value="importos" />
+    <MESSAGE value="symble" />
+    <MESSAGE value="Fileinfo" />
+    <MESSAGE value="cameraaperature" />
+    <option name="LAST_COMMIT_MESSAGE" value="cameraaperature" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="426" y="108" key="#Inspections" timestamp="1594571700926">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="426" y="108" key="#Inspections/0.0.1600.860/1600.0.1440.860@0.0.1600.860" timestamp="1594571700926" />
     <state x="434" y="193" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1588177201502">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
@@ -870,10 +1000,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="615" y="364" key="ReplaceDuplicatesPrompt/0.0.1600.860/1600.0.1440.860@0.0.1600.860" timestamp="1594528720808" />
-    <state x="391" y="150" key="SettingsEditor" timestamp="1594411036637">
+    <state x="391" y="150" key="SettingsEditor" timestamp="1594576451694">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="391" y="150" key="SettingsEditor/0.0.1600.860/1600.0.1440.860@0.0.1600.860" timestamp="1594411036637" />
+    <state x="391" y="150" key="SettingsEditor/0.0.1600.860/1600.0.1440.860@0.0.1600.860" timestamp="1594576451694" />
     <state x="1050" y="-950" key="SettingsEditor/0.22.1440.878/-1019.-878.1600.878/581.-1178.1920.1178@581.-1178.1920.1178" timestamp="1587218711206" />
     <state x="469" y="251" key="SettingsEditor/0.23.1920.1177/-1440.323.1440.877@0.23.1920.1177" timestamp="1588170233303" />
     <state x="1909" y="-49" key="SettingsEditor/1440.-277.1920.1177/0.23.1440.877/-1600.-46.1600.877@1440.-277.1920.1177" timestamp="1588164928722" />
@@ -881,10 +1011,10 @@
       <screen x="0" y="23" width="1920" height="1177" />
     </state>
     <state width="500" height="445" key="SwitcherDM/0.23.1920.1177/-1440.323.1440.877@0.23.1920.1177" timestamp="1588171323201" />
-    <state x="392" y="163" key="Vcs.Push.Dialog.v2" timestamp="1594529484929">
+    <state x="392" y="163" key="Vcs.Push.Dialog.v2" timestamp="1594576911759">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="392" y="163" key="Vcs.Push.Dialog.v2/0.0.1600.860/1600.0.1440.860@0.0.1600.860" timestamp="1594529484929" />
+    <state x="392" y="163" key="Vcs.Push.Dialog.v2/0.0.1600.860/1600.0.1440.860@0.0.1600.860" timestamp="1594576911759" />
     <state x="392" y="163" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1594418425488" />
     <state x="1540" y="-177" width="1720" height="977" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1588165924324">
       <screen x="1440" y="-277" width="1920" height="1177" />
@@ -901,10 +1031,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="643" y="202" key="refactoring.ChangeSignatureDialog/0.0.1600.860/1600.0.1440.860@0.0.1600.860" timestamp="1594409347959" />
-    <state x="521" y="193" width="672" height="494" key="search.everywhere.popup" timestamp="1594530732666">
+    <state x="521" y="193" width="672" height="494" key="search.everywhere.popup" timestamp="1594576854093">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="521" y="193" width="672" height="494" key="search.everywhere.popup/0.0.1600.860/1600.0.1440.860@0.0.1600.860" timestamp="1594530732666" />
+    <state x="521" y="193" width="672" height="494" key="search.everywhere.popup/0.0.1600.860/1600.0.1440.860@0.0.1600.860" timestamp="1594576854093" />
     <state x="521" y="193" width="672" height="494" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1594417727189" />
     <state x="1206" y="-913" width="670" height="676" key="search.everywhere.popup/0.22.1440.878/-1019.-878.1600.878/581.-1178.1920.1178@581.-1178.1920.1178" timestamp="1586370374138" />
   </component>
@@ -933,27 +1063,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/window/PhotoManager.py</url>
-          <line>245</line>
+          <line>247</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>997</line>
+          <line>1019</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>1464</line>
+          <line>1486</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>1754</line>
+          <line>1776</line>
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/ScreenImporting.py</url>
-          <line>913</line>
+          <line>908</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -963,7 +1093,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>1798</line>
+          <line>1820</line>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1003,12 +1133,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/window/PhotoManager.py</url>
-          <line>1737</line>
+          <line>1742</line>
           <option name="timeStamp" value="82" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/window/PhotoManager.py</url>
-          <line>1672</line>
+          <line>1677</line>
           <option name="timeStamp" value="84" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1023,12 +1153,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/window/PhotoManager.py</url>
-          <line>755</line>
+          <line>719</line>
           <option name="timeStamp" value="110" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/window/PhotoManager.py</url>
-          <line>758</line>
+          <line>722</line>
           <option name="timeStamp" value="113" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1043,12 +1173,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>1191</line>
+          <line>1213</line>
           <option name="timeStamp" value="117" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/window/PhotoManager.py</url>
-          <line>193</line>
+          <line>195</line>
           <option name="timeStamp" value="145" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1057,38 +1187,33 @@
           <option name="timeStamp" value="146" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/screens/ScreenImporting.py</url>
-          <line>467</line>
-          <option name="timeStamp" value="154" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/window/PhotoManager.py</url>
-          <line>1608</line>
+          <line>1613</line>
           <option name="timeStamp" value="160" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/window/PhotoManager.py</url>
-          <line>1609</line>
+          <line>1614</line>
           <option name="timeStamp" value="161" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/window/PhotoManager.py</url>
-          <line>192</line>
+          <line>194</line>
           <option name="timeStamp" value="162" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/ScreenImporting.py</url>
-          <line>447</line>
+          <line>420</line>
           <option name="timeStamp" value="163" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/window/PhotoManager.py</url>
-          <line>190</line>
+          <line>192</line>
           <option name="timeStamp" value="166" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/ScreenImporting.py</url>
-          <line>864</line>
+          <line>860</line>
           <option name="timeStamp" value="175" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1098,17 +1223,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>990</line>
+          <line>1012</line>
           <option name="timeStamp" value="202" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>2170</line>
+          <line>2192</line>
           <option name="timeStamp" value="206" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>2181</line>
+          <line>2203</line>
           <option name="timeStamp" value="207" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1148,7 +1273,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/ScreenImporting.py</url>
-          <line>948</line>
+          <line>923</line>
           <option name="timeStamp" value="376" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1163,7 +1288,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/window/PhotoManager.py</url>
-          <line>1675</line>
+          <line>1680</line>
           <option name="timeStamp" value="387" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1183,12 +1308,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenDatabase.py</url>
-          <line>394</line>
+          <line>391</line>
           <option name="timeStamp" value="431" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenDatabase.py</url>
-          <line>439</line>
+          <line>431</line>
           <option name="timeStamp" value="437" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1208,7 +1333,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenDatabase.py</url>
-          <line>564</line>
+          <line>556</line>
           <option name="timeStamp" value="478" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1223,42 +1348,42 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenDatabase.py</url>
-          <line>906</line>
+          <line>902</line>
           <option name="timeStamp" value="506" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenDatabase.py</url>
-          <line>1200</line>
+          <line>1187</line>
           <option name="timeStamp" value="529" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/window/PhotoManager.py</url>
-          <line>1337</line>
+          <line>1342</line>
           <option name="timeStamp" value="550" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenDatabase.py</url>
-          <line>825</line>
+          <line>822</line>
           <option name="timeStamp" value="553" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>1627</line>
+          <line>1649</line>
           <option name="timeStamp" value="555" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>1641</line>
+          <line>1663</line>
           <option name="timeStamp" value="556" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>1629</line>
+          <line>1651</line>
           <option name="timeStamp" value="559" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>1720</line>
+          <line>1742</line>
           <option name="timeStamp" value="567" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1273,7 +1398,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>1326</line>
+          <line>1348</line>
           <option name="timeStamp" value="574" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1283,7 +1408,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>1328</line>
+          <line>1350</line>
           <option name="timeStamp" value="593" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1293,7 +1418,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenAlbum.py</url>
-          <line>983</line>
+          <line>1005</line>
           <option name="timeStamp" value="596" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1303,7 +1428,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenDatabase.py</url>
-          <line>811</line>
+          <line>808</line>
           <option name="timeStamp" value="631" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1313,12 +1438,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenDatabase.py</url>
-          <line>884</line>
+          <line>879</line>
           <option name="timeStamp" value="707" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenDatabase.py</url>
-          <line>887</line>
+          <line>882</line>
           <option name="timeStamp" value="724" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1333,22 +1458,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/window/PhotoManager.py</url>
-          <line>1700</line>
+          <line>1705</line>
           <option name="timeStamp" value="736" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenDatabase.py</url>
-          <line>1299</line>
+          <line>1285</line>
           <option name="timeStamp" value="742" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenDatabase.py</url>
-          <line>728</line>
+          <line>725</line>
           <option name="timeStamp" value="759" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TreeViewItem/TreeViewItemTag.py</url>
-          <line>26</line>
+          <line>27</line>
           <option name="timeStamp" value="762" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1358,17 +1483,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/window/PhotoManager.py</url>
-          <line>1392</line>
+          <line>1397</line>
           <option name="timeStamp" value="774" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenDatabase.py</url>
-          <line>1219</line>
+          <line>1205</line>
           <option name="timeStamp" value="788" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens/screenDatabase.py</url>
-          <line>1153</line>
+          <line>1143</line>
           <option name="timeStamp" value="791" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
