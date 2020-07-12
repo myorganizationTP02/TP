@@ -698,45 +698,7 @@ class PhotoManager(App):
         else:
             del window
             current_screen = self.screen_manager.current_screen
-            if scancode == 97:
-                #a key
-                current_screen.key('a')
-            if scancode == 276:
-                #left key
-                current_screen.key('left')
-            if scancode == 275:
-                #right key
-                current_screen.key('right')
-            if scancode == 273:
-                #up key
-                current_screen.key('up')
-            if scancode == 274:
-                #down key
-                current_screen.key('down')
-            if scancode == 32:
-                #space key
-                current_screen.key('space')
-            if scancode == 13:
-                #enter key
-                current_screen.key('enter')
-            if scancode == 127 or scancode == 8:
-                #delete and backspace key
-                current_screen.key('delete')
-            if scancode == 9:
-                #tab key
-                current_screen.key('tab')
-            if scancode == 282:
-                #f1 key
-                current_screen.key('f1')
-            if scancode == 283:
-                #f2 key
-                current_screen.key('f2')
-            if scancode == 284:
-                #f3 key
-                current_screen.key('f3')
-            if scancode == 285:
-                #f4 key
-                current_screen.key('f4')
+            self.scancodecurrentscreen(current_screen, scancode)
             if scancode == 27:  #Escape
                 self.clear_drags()
                 if Window.keyboard_height > 0:
@@ -758,6 +720,47 @@ class PhotoManager(App):
                     else:
                         self.show_database()
                     return True
+
+    def scancodecurrentscreen(self, current_screen, scancode):
+        if scancode == 97:
+            # a key
+            current_screen.key('a')
+        if scancode == 276:
+            # left key
+            current_screen.key('left')
+        if scancode == 275:
+            # right key
+            current_screen.key('right')
+        if scancode == 273:
+            # up key
+            current_screen.key('up')
+        if scancode == 274:
+            # down key
+            current_screen.key('down')
+        if scancode == 32:
+            # space key
+            current_screen.key('space')
+        if scancode == 13:
+            # enter key
+            current_screen.key('enter')
+        if scancode == 127 or scancode == 8:
+            # delete and backspace key
+            current_screen.key('delete')
+        if scancode == 9:
+            # tab key
+            current_screen.key('tab')
+        if scancode == 282:
+            # f1 key
+            current_screen.key('f1')
+        if scancode == 283:
+            # f2 key
+            current_screen.key('f2')
+        if scancode == 284:
+            # f3 key
+            current_screen.key('f3')
+        if scancode == 285:
+            # f4 key
+            current_screen.key('f4')
 
     def setup_import_presets(self):
         """Reads the import presets from the config file and saves them to the app.imports variable."""
