@@ -1602,7 +1602,7 @@ class ScreenAlbum(Screen):
             camera_f = str(f_stop[0] / f_stop[1])
             info_panel.add_node(TreeViewInfo(title='F Stop: ' + camera_f))
         if 37378 in exif:
-            camera_aperture = str(exif[37378][0] / exif[37378][0])
+            camera_aperture = str(exif[37378][0]/exif[37378][0])
             info_panel.add_node(TreeViewInfo(title='Aperture: ' + camera_aperture))
         if 34855 in exif:
             camera_iso = str(exif[34855])
