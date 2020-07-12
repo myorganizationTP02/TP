@@ -586,14 +586,7 @@ class ScreenAlbum(Screen):
                 return [False, 'Input file must be specified', '']
             if '%c' not in encoding_command:
                 extension = ''
-                if '-f' in encoding_command:
-                    detect_format = encoding_command[encoding_command.find('-f')+2:].strip().split(' ')[0].lower()
-                    supported_formats = fftools.get_fmts(output=True)
-                    if detect_format in supported_formats[0]:
-                        format_index = supported_formats[0].index(detect_format)
-                        extension_list = supported_formats[2][format_index]
-                        if extension_list:
-                            extension = extension_list[0]
+                extension = self.encodingextenstion(encoding_command, extension)
                 if not extension:
                     return [False, 'Could not determine ffmpeg container format.', '']
             output_filename = os.path.splitext(input_filename)[0]+'.'+extension
@@ -607,6 +600,17 @@ class ScreenAlbum(Screen):
             #command = 'ffmpeg '+file_format_settings+' -i "'+input_file+'"'+filter_settings+' -sn '+speed_setting+' '+video_codec_settings+' '+audio_codec_settings+' '+framerate_setting+' '+pixel_format_setting+' '+video_bitrate_settings+' '+audio_bitrate_settings+' "'+output_file+'"'
             command = 'ffmpeg'+seek+' '+input_format_settings+' -i "'+input_file+'" '+file_format_settings+' '+filter_settings+' -sn '+speed_setting+' '+video_codec_settings+' '+audio_codec_settings+' '+framerate_setting+' '+pixel_format_setting+' '+video_bitrate_settings+' '+audio_bitrate_settings+duration+' "'+output_file+'"'
         return [True, command, output_filename]
+
+    def encodingextenstion(self, encoding_command, extension):
+        if '-f' in encoding_command:
+            detect_format = encoding_command[encoding_command.find('-f') + 2:].strip().split(' ')[0].lower()
+            supported_formats = fftools.get_fmts(output=True)
+            if detect_format in supported_formats[0]:
+                format_index = supported_formats[0].index(detect_format)
+                extension_list = supported_formats[2][format_index]
+                if extension_list:
+                    extension = extension_list[0]
+        return extension
 
     def deinterlacecheck(self, deinterlace):
         if deinterlace:
