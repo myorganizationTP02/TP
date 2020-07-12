@@ -627,7 +627,7 @@ class ScreenDatabase(Screen):
                 app.session.commit();
                 app.message("Deleted " + str(len(selected_photos)) + " Files.")
 
-            self.on_selected('', '')
+            self.on_selected('')
         self.dismiss_popup()
         # self.create_treeview()
 
