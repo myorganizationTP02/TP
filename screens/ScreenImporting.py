@@ -434,15 +434,7 @@ class ScreenImporting(Screen):
                 photos = folder['photos']
                 parent = folder['parent']
                 folder_name, folderinfo, path = self.ifparent(folder, folder_name, folders, import_to, parent)
-                if not os.path.isdir(path):
-                    os.makedirs(path)
-                if not app.Folder.exist(folderinfo[0]):
-                    app.Folder.insert(folderinfo)
-                else:
-                    if folderinfo[1]:
-                        app.Folder.update_title(folderinfo[0], folderinfo[1]).commit()
-                    if folderinfo[2]:
-                        app.Folder.update_description(path, description)(folderinfo[0], folderinfo[2])
+                self.ospathisdir(app, folderinfo, path)
 
                 # Scan and import photos in folder
                 for photo in photos:
@@ -515,6 +507,17 @@ class ScreenImporting(Screen):
         self.scanningpopup = None
         self.import_scanning = False
         Clock.schedule_once(lambda *dt: app.show_database())
+
+    def ospathisdir(self, app, folderinfo, path):
+        if not os.path.isdir(path):
+            os.makedirs(path)
+        if not app.Folder.exist(folderinfo[0]):
+            app.Folder.insert(folderinfo)
+        else:
+            if folderinfo[1]:
+                app.Folder.update_title(folderinfo[0], folderinfo[1]).commit()
+            if folderinfo[2]:
+                app.Folder.update_description(path, description)(folderinfo[0], folderinfo[2])
 
     def ifparent(self, folder, folder_name, folders, import_to, parent):
         if parent:
