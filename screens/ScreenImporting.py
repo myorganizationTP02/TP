@@ -895,8 +895,7 @@ class ScreenImporting(Screen):
             offset_x, offset_y = folder_list.to_widget(position[0], position[1])
             for widget in folder_list.children:
                 if widget.collide_point(position[0],
-                                        offset_y) and widget.type != 'None' and self.type != 'None' and not (
-                    widget.target == 'duplicates' and widget.type == 'extra'):
+                                        offset_y) and widget.type != 'None' and self.type != 'None' and not (widget.target == 'duplicates' and widget.type == 'extra'):
 
                     if dropped_type == 'folder':
                         # Dropped a folder
@@ -936,33 +935,36 @@ class ScreenImporting(Screen):
                             photo_list.append(fullpath)
                         for photo_path in photo_list:
                             photo_info = False
-                            if self.type == 'folder':
-                                photo_info = self.find_photo(photo_path, self.folders[self.selected]['photos'])
-                                if photo_info:
-                                    self.folders[self.selected]['photos'].remove(photo_info)
-                            else:
-                                if self.selected == 'unsorted':
-                                    photo_info = self.find_photo(photo_path, self.unsorted)
-                                    if photo_info:
-                                        self.unsorted.remove(photo_info)
-                                elif self.selected == 'removed':
-                                    photo_info = self.find_photo(photo_path, self.removed)
-                                    if photo_info:
-                                        self.removed.remove(photo_info)
-                            if photo_info:
-                                if widget.type == 'folder':
-                                    self.folders[widget.target]['photos'].append(photo_info)
-                                else:
-                                    if widget.target == 'unsorted':
-                                        self.unsorted.append(photo_info)
-                                    elif widget.target == 'removed':
-                                        self.removed.append(photo_info)
+                            self.photoinfopathwidget(photo_info, photo_path, widget)
 
                         self.type = widget.type
                         self.selected = widget.target
                         self.update_treeview()
                         self.select_none()
                     break
+
+    def photoinfopathwidget(self, photo_info, photo_path, widget):
+        if self.type == 'folder':
+            photo_info = self.find_photo(photo_path, self.folders[self.selected]['photos'])
+            if photo_info:
+                self.folders[self.selected]['photos'].remove(photo_info)
+        else:
+            if self.selected == 'unsorted':
+                photo_info = self.find_photo(photo_path, self.unsorted)
+                if photo_info:
+                    self.unsorted.remove(photo_info)
+            elif self.selected == 'removed':
+                photo_info = self.find_photo(photo_path, self.removed)
+                if photo_info:
+                    self.removed.remove(photo_info)
+        if photo_info:
+            if widget.type == 'folder':
+                self.folders[widget.target]['photos'].append(photo_info)
+            else:
+                if widget.target == 'unsorted':
+                    self.unsorted.append(photo_info)
+                elif widget.target == 'removed':
+                    self.removed.append(photo_info)
 
     def update_selected(self):
         """Updates the delete button when files are selected or unselected.  Disables button if nothing is selected."""
