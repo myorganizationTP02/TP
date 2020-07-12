@@ -43,7 +43,7 @@ from generalconstants import *
 print('Startup Time: ' + str(time.perf_counter() - start))
 
 version = sys.version_info
-kivy.require('1.10.0')
+#kivy.require('1.10.0')
 lock = threading.Lock()
 
 if desktop:
@@ -55,10 +55,10 @@ if desktop:
 else:
     Window.softinput_mode = 'below_target'
 
-if platform == 'android':
-    from android.permissions import request_permissions, Permission
+#if platform == 'android':
+#    from android.permissions import request_permissions, Permission
 
-    request_permissions([Permission.WRITE_EXTERNAL_STORAGE])
+#    request_permissions([Permission.WRITE_EXTERNAL_STORAGE])
 
 if __name__ == '__main__':
     PhotoManager().run()
