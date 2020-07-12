@@ -776,7 +776,7 @@ class ScreenDatabase(Screen):
             self.select_none()
             if added_person:
                 if person_name == 'favorite':
-                    self.on_selected()
+                    self.on_selected(self.selected_item)
                 app.photos.commit()
                 # self.create_treeview()
                 app.message("Added person '" + person_name + "' to " + str(added_person) + " files.")
@@ -1236,7 +1236,7 @@ class ScreenDatabase(Screen):
         self.dismiss_popup()
         # self.create_treeview()
 
-    def on_selected(self, selected_treeViewItem):
+    def on_selected(self, selected_item):
         """Called when the selected folder/album/tag is changed.
         Clears and draws the photo list.
         """
