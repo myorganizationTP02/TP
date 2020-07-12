@@ -1236,7 +1236,7 @@ class ScreenDatabase(Screen):
         self.dismiss_popup()
         # self.create_treeview()
 
-    def on_selected(self, selected_item):
+    def on_selected(self, selected_treeViewItem):
         """Called when the selected folder/album/tag is changed.
         Clears and draws the photo list.
         """
