@@ -11,17 +11,17 @@ class TreeViewItemTag(TreeViewItem):
     can_delete_folder = True
 
 
-    def visit(self,screenDatabase):
+    def visit(self):
         super(TreeViewItemTag, self).visit()
 
-        screenDatabase = self.owner
+        screendatabase = self.owner
         datas = []
         for photo in self.item.photos:
-            datas.append(photo.data_item(screenDatabase))
+            datas.append(photo.data_item(screendatabase))
 
-        screenDatabase.data = datas
-        screenDatabase.update_can_browse()
-        screenDatabase.update_selected()
+        screendatabase.data = datas
+        screendatabase.update_can_browse()
+        screendatabase.update_selected()
 
     def visit_drop(self, visitors):
         self.owner.add_to_tag(self.item, visitors)
