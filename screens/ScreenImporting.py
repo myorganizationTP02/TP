@@ -217,6 +217,7 @@ class ScreenImporting(Screen):
     start_time = NumericProperty()
     import_scanning = BooleanProperty(False)
 
+
     def get_selected_photos(self, fullpath=False):
         photos = self.ids['photos']
         selected_indexes = photos.selected_nodes
@@ -476,6 +477,17 @@ class ScreenImporting(Screen):
         self.scanningpopup = None
         self.import_scanning = False
         Clock.schedule_once(lambda *dt: app.show_database())
+
+    def new_description(self, description_editor):
+            """Called when the description field of the currently selected folder is edited.
+            Update internal variables to match.
+            Argument:
+                description_editor: The input box that has been edited.
+            """
+
+            description = description_editor.text
+            if self.type == 'folder':
+                self.folders[self.selected]['description'] = description
 
     def newoldfile(self, new_full_filename, old_full_filename):
         if self.delete_originals:
@@ -743,16 +755,7 @@ class ScreenImporting(Screen):
         delete_button.disabled = True
         self.update_photolist()
 
-    def new_description(self, description_editor):
-        """Called when the description field of the currently selected folder is edited.
-        Update internal variables to match.
-        Argument:
-            description_editor: The input box that has been edited.
-        """
 
-        description = description_editor.text
-        if self.type == 'folder':
-            self.folders[self.selected]['description'] = description
 
     def new_title(self, title_editor):
         """Called when the title field of the currently selected folder is edited.
