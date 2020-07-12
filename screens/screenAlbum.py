@@ -548,36 +548,9 @@ class ScreenAlbum(Screen):
             encoding_command = encoding_settings['command_line']
             extension = containers_extensions[containers.index(file_format)]
 
-        if start is not None:
-            seek = ' -ss '+str(start)
-        else:
-            seek = ''
-        if duration is not None:
-            duration = ' -t '+str(duration)
-        else:
-            duration = ''
-        if not input_file:
-            input_file = input_folder+os.path.sep+input_filename
-        if input_framerate:
-            output_framerate = self.new_framerate(video_codec, input_framerate)
-        else:
-            output_framerate = False
-        if output_framerate:
-            framerate_setting = "-r "+str(output_framerate[0] / output_framerate[1])
-        else:
-            framerate_setting = ""
-        if input_images:
-            input_format_settings = '-f image2pipe -vcodec mjpeg ' + framerate_setting
-        else:
-            input_format_settings = ''
-        if input_pixel_format:
-            output_pixel_format = self.new_pixel_format(video_codec, input_pixel_format)
-        else:
-            output_pixel_format = False
-        if output_pixel_format:
-            pixel_format_setting = "-pix_fmt "+str(output_pixel_format)
-        else:
-            pixel_format_setting = ""
+        duration, framerate_setting, input_file, input_format_settings, pixel_format_setting, seek = self.paramcheck(
+            duration, input_file, input_filename, input_folder, input_framerate, input_images, input_pixel_format,
+            start, video_codec)
 
         if video_codec == 'libx264':
             speed_setting = "-preset "+encoding_speed
@@ -642,6 +615,40 @@ class ScreenAlbum(Screen):
             #command = 'ffmpeg '+file_format_settings+' -i "'+input_file+'"'+filter_settings+' -sn '+speed_setting+' '+video_codec_settings+' '+audio_codec_settings+' '+framerate_setting+' '+pixel_format_setting+' '+video_bitrate_settings+' '+audio_bitrate_settings+' "'+output_file+'"'
             command = 'ffmpeg'+seek+' '+input_format_settings+' -i "'+input_file+'" '+file_format_settings+' '+filter_settings+' -sn '+speed_setting+' '+video_codec_settings+' '+audio_codec_settings+' '+framerate_setting+' '+pixel_format_setting+' '+video_bitrate_settings+' '+audio_bitrate_settings+duration+' "'+output_file+'"'
         return [True, command, output_filename]
+
+    def paramcheck(self, duration, input_file, input_filename, input_folder, input_framerate, input_images,
+                   input_pixel_format, start, video_codec):
+        if start is not None:
+            seek = ' -ss ' + str(start)
+        else:
+            seek = ''
+        if duration is not None:
+            duration = ' -t ' + str(duration)
+        else:
+            duration = ''
+        if not input_file:
+            input_file = input_folder + os.path.sep + input_filename
+        if input_framerate:
+            output_framerate = self.new_framerate(video_codec, input_framerate)
+        else:
+            output_framerate = False
+        if output_framerate:
+            framerate_setting = "-r " + str(output_framerate[0] / output_framerate[1])
+        else:
+            framerate_setting = ""
+        if input_images:
+            input_format_settings = '-f image2pipe -vcodec mjpeg ' + framerate_setting
+        else:
+            input_format_settings = ''
+        if input_pixel_format:
+            output_pixel_format = self.new_pixel_format(video_codec, input_pixel_format)
+        else:
+            output_pixel_format = False
+        if output_pixel_format:
+            pixel_format_setting = "-pix_fmt " + str(output_pixel_format)
+        else:
+            pixel_format_setting = ""
+        return duration, framerate_setting, input_file, input_format_settings, pixel_format_setting, seek
 
     def encode_process(self):
         """Uses ffmpeg command line to reencode the current video file to a new format."""
