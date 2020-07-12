@@ -46,6 +46,8 @@ from screenSettings.AboutPopup import AboutPopup
 from screenSettings.PhotoManagerSettings import PhotoManagerSettings
 from send2trash import send2trash
 from window.Theme import Theme
+from pyfileinfo import PyFileInfo
+from pyfileinfo import PyFileInfo
 
 
 class PhotoManager(App):
@@ -188,7 +190,7 @@ class PhotoManager(App):
                 modified_date = int(os.path.getmtime(photo_filename))
                 if modified_date != old_photoinfo[7] or force:
                     #file has been modified somehow, need to update data
-                    new_photoinfo = FileInfo([old_photoinfo[0], old_photoinfo[2]], import_mode=True, modified_date=modified_date)
+                    new_photoinfo = PyFileInfo([old_photoinfo[0], old_photoinfo[2]], import_mode=True, modified_date=modified_date)
                     photoinfo = list(old_photoinfo)
                     photoinfo[7] = new_photoinfo.tags
                     photoinfo[13] = new_photoinfo.edited
