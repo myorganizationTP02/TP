@@ -342,7 +342,7 @@ class ScreenExporting(Screen):
         if percent_completed > 0:
             total_time = (100/percent_completed)*time_taken
             time_remaining = total_time - time_taken
-            str(datetime.timedelta(seconds=time_remaining))
+            # str(datetime.timedelta(seconds=time_remaining))
             remaining = ', '+str(datetime.timedelta(seconds=int(time_remaining)))+' Remaining'
         else:
             remaining = ''
