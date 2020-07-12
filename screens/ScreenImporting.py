@@ -419,13 +419,7 @@ class ScreenImporting(Screen):
         imported_files = 0
         failed_files = 0
 
-        if disk_usage:
-            free_space = disk_usage(import_to)[2]
-            if total_size > free_space:
-                self.scanningpopup.dismiss()
-                self.scanningpopup = None
-                app.message("Not enough free drive space! Cancelled import.")
-                Clock.schedule_once(lambda *dt: app.show_import())
+        self.diskusage(app, import_to, total_size)
 
         # Scan folders
         for folder_path in folders:
@@ -439,21 +433,7 @@ class ScreenImporting(Screen):
                                          month=folder['month'], day=folder['day'])
                 photos = folder['photos']
                 parent = folder['parent']
-                if parent:
-                    path_string = []
-                    while parent:
-                        newfolder = folders[parent]
-                        newfolder_name = newfolder['name']
-                        if newfolder['naming']:
-                            newfolder_name = naming(self.naming_method, title=newfolder['title'],
-                                                    year=newfolder['year'], month=newfolder['month'],
-                                                    day=newfolder['day'])
-                        path_string.append(newfolder_name)
-                        parent = newfolder['parent']
-                    for path in path_string:
-                        folder_name = os.path.join(path, folder_name)
-                folderinfo = [folder_name, folder['title'], folder['description']]
-                path = os.path.join(import_to, folder_name)
+                folder_name, folderinfo, path = self.ifparent(folder, folder_name, folders, import_to, parent)
                 if not os.path.isdir(path):
                     os.makedirs(path)
                 if not app.Folder.exist(folderinfo[0]):
@@ -535,6 +515,33 @@ class ScreenImporting(Screen):
         self.scanningpopup = None
         self.import_scanning = False
         Clock.schedule_once(lambda *dt: app.show_database())
+
+    def ifparent(self, folder, folder_name, folders, import_to, parent):
+        if parent:
+            path_string = []
+            while parent:
+                newfolder = folders[parent]
+                newfolder_name = newfolder['name']
+                if newfolder['naming']:
+                    newfolder_name = naming(self.naming_method, title=newfolder['title'],
+                                            year=newfolder['year'], month=newfolder['month'],
+                                            day=newfolder['day'])
+                path_string.append(newfolder_name)
+                parent = newfolder['parent']
+            for path in path_string:
+                folder_name = os.path.join(path, folder_name)
+        folderinfo = [folder_name, folder['title'], folder['description']]
+        path = os.path.join(import_to, folder_name)
+        return folder_name, folderinfo, path
+
+    def diskusage(self, app, import_to, total_size):
+        if disk_usage:
+            free_space = disk_usage(import_to)[2]
+            if total_size > free_space:
+                self.scanningpopup.dismiss()
+                self.scanningpopup = None
+                app.message("Not enough free drive space! Cancelled import.")
+                Clock.schedule_once(lambda *dt: app.show_import())
 
     def set_delete_originals(self, state):
         """Enable the 'Delete Originals' option."""
