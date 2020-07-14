@@ -1546,19 +1546,19 @@ class PhotoManager(App):
                 file_list.append([os.path.join(filefolder, file), firstroot])
         return file_list
 
-    def database_find_file(self, file_info):
-        #search the screenDatabase for a file that has been moved to a new directory, returns the updated info or None if not found.
-        filepath, filename = os.path.split(file_info[0])
-        old_photos = self.photos.select('SELECT * FROM photos WHERE FullPath LIKE ?', ('%'+filename+'%',))
+    def database_find_file(self, fileinfo):
+        # search the screenDatabase for a file that has been moved to a new directory, returns the updated info or None if not found.
+        filepath, filename = os.path.split(fileinfo[0])
+        old_photos = self.photos.select('SELECT * FROM photos WHERE FullPath LIKE ?', ('%' + filename + '%',))
         if old_photos:
             possible_matches = []
             old_photos = list(old_photos)
             for photo in old_photos:
-                #check if photo still exists, ignore if it does
+                # check if photo still exists, ignore if it does
                 photo_path = os.path.join(local_path(photo[2]), local_path(photo[0]))
                 if not os.path.exists(photo_path):
                     possible_matches.append(photo)
-            #return first match
+            # return first match
             if possible_matches:
                 return possible_matches[0]
         return None
@@ -1592,15 +1592,16 @@ class PhotoManager(App):
                     #photo not in screenDatabase, add it or ceck if moved
                     raise ValueError('must verify next function')
                     #file_info = get_file_info(file_info)
-                    found_file = self.database_find_file(file_info)
-                    if found_file:
-                        found_file = agnostic_photoinfo(list(found_file))
-                        self.Photo.rename(found_file[0], file_info[0], file_info[1], dontcommit=True)
-                        update_folders.append(found_file[1])
-                        update_folders.append(file_info[1])
-                    else:
-                        self.Photo.add(file_info)
-                        update_folders.append(file_info[1])
+                    #found_file = self.database_find_file(file_info)
+
+                    #if found_file:
+                      #  found_file = agnostic_photoinfo(list(found_file))
+                      #  self.Photo.rename(found_file[0], file_info[0], file_info[1], dontcommit=True)
+                       # update_folders.append(found_file[1])
+                        # update_folders.append(file_info[1])
+                    # else:
+                       # self.Photo.add(file_info)
+                      #  update_folders.append(file_info[1])
                 else:
                     #photo is already in the screenDatabase
                     #check modified date to see if it needs to be updated and look for duplicates
