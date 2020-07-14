@@ -415,7 +415,15 @@ class ScreenImporting(Screen):
                 photos = folder['photos']
                 parent = folder['parent']
                 folder_name, folderinfo, path = self.ifparent(folder, folder_name, folders, import_to, parent)
-                self.ospathisdir(app, folderinfo, path)
+                if not os.path.isdir(path):
+                    os.makedirs(path)
+                if not app.Folder.exist(folderinfo[0]):
+                    app.Folder.insert(folderinfo)
+                else:
+                    if folderinfo[1]:
+                        app.Folder.update_title(folderinfo[0], folderinfo[1]).commit()
+                    if folderinfo[2]:
+                        app.Folder.update_description(path, description)(folderinfo[0], folderinfo[2])
 
                 # Scan and import photos in folder
                 for photo in photos:
@@ -510,16 +518,17 @@ class ScreenImporting(Screen):
         thumbnail_data = app.Photo.thumbnail(photo[2], temporary=True)
         return new_full_filename, new_photo_fullpath, old_full_filename, thumbnail_data
 
-    def ospathisdir(self, app, folderinfo, path):
-        if not os.path.isdir(path):
-            os.makedirs(path)
-        if not app.Folder.exist(folderinfo[0]):
-            app.Folder.insert(folderinfo)
-        else:
-            if folderinfo[1]:
-                app.Folder.update_title(folderinfo[0], folderinfo[1]).commit()
-            if folderinfo[2]:
-                app.Folder.update_description(path, description)(folderinfo[0], folderinfo[2])
+    #def ospathisdir(self, app, folderinfo, path):
+
+     #   if not os.path.isdir(path):
+      #      os.makedirs(path)
+       # if not app.Folder.exist(folderinfo[0]):
+        #    app.Folder.insert(folderinfo)
+        #else:
+         #   if folderinfo[1]:
+          #      app.Folder.update_title(folderinfo[0], folderinfo[1]).commit()
+           # if folderinfo[2]:
+            #    app.Folder.update_description(path, description)(folderinfo[0], folderinfo[2])
 
     def ifparent(self, folder, folder_name, folders, import_to, parent):
         if parent:
