@@ -513,24 +513,26 @@ class ScreenExporting(Screen):
                 if extension.lower() in imagetypes and (preset['scale_image'] or preset['watermark']):
                     # image needs to be edited in some way
                     imagedata = Image.open(photofile)
-                    if imagedata.mode != 'RGB':
-                        imagedata = imagedata.convert('RGB')
-                    orientation = photo[13]
-                    imagedata = app.edit_fix_orientation(imagedata, orientation)
-
-                    if preset['scale_image']:
-                        imagedata = app.edit_scale_image(imagedata, preset['scale_size'], preset['scale_size_to'])
-                    if preset['watermark']:
-                        imagedata = app.edit_add_watermark(imagedata, preset['watermark_image'],
-                                                           preset['watermark_opacity'], preset['watermark_horizontal'],
-                                                           preset['watermark_vertical'], preset['watermark_size'])
-                    imagedata.save(savefile, 'JPEG', quality=preset['jpeg_quality'])
+                    self.indexinphoto2(app, imagedata, photo, preset, savefile)
                 else:
                     # image or video should just be copied
                     copy2(photofile, savefile)
                 exported_photos = exported_photos + 1
                 self.exported_size = self.exported_size + photo_size
         self.exporting = False
+
+    def indexinphoto2(self, app, imagedata, photo, preset, savefile):
+        if imagedata.mode != 'RGB':
+            imagedata = imagedata.convert('RGB')
+        orientation = photo[13]
+        imagedata = app.edit_fix_orientation(imagedata, orientation)
+        if preset['scale_image']:
+            imagedata = app.edit_scale_image(imagedata, preset['scale_size'], preset['scale_size_to'])
+        if preset['watermark']:
+            imagedata = app.edit_add_watermark(imagedata, preset['watermark_image'],
+                                               preset['watermark_opacity'], preset['watermark_horizontal'],
+                                               preset['watermark_vertical'], preset['watermark_size'])
+        imagedata.save(savefile, 'JPEG', quality=preset['jpeg_quality'])
 
     def presetcrestesubfolder(self, app, export_photos, photos, preset, subfolder):
         if preset['create_subfolder']:
