@@ -423,7 +423,7 @@ class ScreenImporting(Screen):
                     if folderinfo[1]:
                         app.Folder.update_title(folderinfo[0], folderinfo[1]).commit()
                     if folderinfo[2]:
-                        app.Folder.update_description(path, description)(folderinfo[0], folderinfo[2])
+                        app.Folder.update_description(path)(folderinfo[0], folderinfo[2])
 
                 # Scan and import photos in folder
                 for photo in photos:
